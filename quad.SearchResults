@@ -1,0 +1,24 @@
+---- AnBT_Uart1_Send_String Matches (23 in 3 files) ----
+Anbt_dmp_mpu6050.c (user\anbt_dmp):               // AnBT_Uart1_Send_String("WHOAMI error",12); 
+Anbt_dmp_mpu6050.c (user\anbt_dmp):                       // AnBT_Uart1_Send_String("Unsupported version=1.0",23);  
+Anbt_dmp_mpu6050.c (user\anbt_dmp):                       // AnBT_Uart1_Send_String("Product ID error",16); 
+Anbt_dmp_mpu6050.c (user\anbt_dmp):                       // AnBT_Uart1_Send_String("Half Sensitivity Part",21); 
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	//AnBT_Uart1_Send_String("P-1,Finish DMP device init.",27); 
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	if(!mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL));// AnBT_Uart1_Send_String("P-2,Finish DMP set sensor.",26);
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	//else AnBT_Uart1_Send_String("P-2,DMP set sensor error.",25);
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	if(!mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL));// AnBT_Uart1_Send_String("P-3,Finish DMP configure fifo.",30);
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	//else AnBT_Uart1_Send_String("P-3,DMP configure fifo error.",29);
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	if(!mpu_set_sample_rate(DEFAULT_MPU_HZ));//AnBT_Uart1_Send_String("P-4,Finish DMP set sample rate.",31);
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	//else AnBT_Uart1_Send_String("P-4,DMP set sample_rate error.",30);
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	if(!dmp_load_motion_driver_firmware())	;//AnBT_Uart1_Send_String("P-5,Finish DMP load motion driver firmware.",43);
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	//else AnBT_Uart1_Send_String("P-5,DMP load motion driver firmware error.",42);
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	if(!dmp_set_orientation(inv_orientation_matrix_to_scalar(gyro_orientation)));// AnBT_Uart1_Send_String("P-6,Finish DMP set orientation.",31);
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	//else AnBT_Uart1_Send_String("P-6,DMP set orientation error.",30);
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	DMP_FEATURE_GYRO_CAL));//		AnBT_Uart1_Send_String("P-7,Finish DMP enable feature.",30);
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	//else AnBT_Uart1_Send_String("P-7,DMP enable feature error.",29);
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	if(!dmp_set_fifo_rate(DEFAULT_MPU_HZ)); //AnBT_Uart1_Send_String("P-8,Finish DMP set fifo rate.",29);
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	//else AnBT_Uart1_Send_String("P-8,DMP set fifo rate error.",28);
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	if(!mpu_set_dmp_state(1)); //AnBT_Uart1_Send_String("P-9,Finish DMP set dmp state.",29);
+Anbt_dmp_mpu6050.c (user\anbt_dmp):	//else AnBT_Uart1_Send_String("P-9,DMP set dmp state error.",28);	
+Anbt_i2c.c (user):              //AnBT_Uart1_Send_String("M-4,Init I2C Device.",20);
+Anbt_uart.c (user):  AnBT_Uart1_Send_String("M-1,Init COM Device.",20);
