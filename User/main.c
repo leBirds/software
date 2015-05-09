@@ -84,7 +84,7 @@ int main(void)
 	{
              DrYL_PID_Control_pitch_roll(); 
              DrYL_GetCommand();
-             if(time_1ms_cnt>5000)
+            /* if(time_1ms_cnt>5000)
              { 
                     time_1ms_cnt=0;
                     
@@ -125,7 +125,7 @@ int main(void)
       
              }
              
-             
+             */
                           
          }
   

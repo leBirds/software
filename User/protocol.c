@@ -107,8 +107,8 @@ void DrYL_GetCommand(void)
 		{
 			case cmdStart :
 				DrYL_Moto_Start();
-                                AnBT_Uart3_Send_Char('1');
-                                AnBT_Uart3_Send_Char('2');
+                               // AnBT_Uart3_Send_Char('1');  // ต๗สิ
+                               // AnBT_Uart3_Send_Char('2');   // ต๗สิ
 			break;
 			case cmdStop:
 				DrYL_Motor_Stop();

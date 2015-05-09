@@ -142,10 +142,10 @@ void DrYL_Motor_Stop(void)
 
 void DrYL_Moto_Start(void)
 {
-	 Moto_X_Positive   = (Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
-        Moto_X_Negative  = (Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
-        Moto_Y_Positive    = (Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
-        Moto_Y_Negative  = (Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
+	 Moto_X_Positive   = 999;//(Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
+        Moto_X_Negative  = 999;//(Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
+        Moto_Y_Positive    = 999;//(Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
+        Moto_Y_Negative  = 999;//(Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
 	 MotoPWMControl(Moto_X_Positive,Moto_X_Negative,Moto_Y_Positive,Moto_Y_Negative);
 }
 void DrYL_Moto_Top(void)
