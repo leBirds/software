@@ -230,8 +230,8 @@ u8 DrYL_PID_Control_pitch_roll(void)
             TIM2_IRQCNT=0; 
                      
             DrYL_Send_Moto(Moto_X_Positive,Moto_X_Negative,Moto_Y_Positive,Moto_Y_Negative);
-            DrYL_Set_PID(2,0,0,&pitch_pid);//设置pitch  pid参数
-            DrYL_Set_PID(2,0,0,&roll_pid);//设置roll  pid 参数
+            DrYL_Set_PID(1,0,0,&pitch_pid);//设置pitch  pid参数
+            DrYL_Set_PID(1,0,0,&roll_pid);//设置roll  pid 参数
             pitch_pid_result=DrYL_IncPID_Calc(Pitch,&pitch_pid); // 计算增量型参数
             roll_pid_result=DrYL_IncPID_Calc(Roll,&roll_pid); //
             // 一个调节周期之内不会让它一直上升,只调节一对电机，另一对电机作为参考 
@@ -242,6 +242,7 @@ u8 DrYL_PID_Control_pitch_roll(void)
             else
             {
                    Moto_X_Negative+=pitch_pid_result;
+                   Moto_X_Positive-=pitch_pid_result;
             }
             if((roll_pid.LastError<1)&&(roll_pid.LastError>-1))
             {
@@ -251,6 +252,7 @@ u8 DrYL_PID_Control_pitch_roll(void)
             {  
               
                     Moto_Y_Negative+=roll_pid_result;
+                    Moto_Y_Positive-=roll_pid_result;
             }	
             
             if(Moto_X_Positive   > Moto_PwmMax_Debug)	Moto_X_Positive    = Moto_PwmMax_Debug;
