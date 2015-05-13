@@ -19,41 +19,45 @@ float pitch_table_filtered[DATA_LENGTH]={0};
 Initialize PID Structure PID参数初始化
 =====================================================================================================*/
  
-void DrYL_IncPIDInit(PID *sptr)
+void DrYL_IncPIDInit(PID *sptr,const float kp,
+                     const float ki,const float kd)
 {
     sptr->SumError = 0; 
     sptr->LastError = 0; //Error[-1]   
     sptr->PrevError = 0; //Error[-2]
-    sptr->Proportion = 0; //比例常数 Proportional Const
-    sptr->Integral = 0; //积分常数Integral Const
-    sptr->Derivative = 0; //微分常数 Derivative Const
-    sptr->SetPoint = 0; 
+    sptr->Proportion = kp; //比例常数 Proportional Const
+    sptr->Integral = ki; //积分常数Integral Const
+    sptr->Derivative = kd; //微分常数 Derivative Const
+    //sptr->SetPoint = desired; 
 }
  
 /*====================================================================================================
 增量式PID计算部分
 =====================================================================================================*/
  
-int DrYL_IncPID_Calc(float NextPoint, PID *sptr)
+int DrYL_IncPID_Calc(PID *sptr,const float measured,float expect)
 { 
     int iError, iIncpid; //当前误差   
-    iError = (int)(NextPoint - sptr->SetPoint ); //增量计算  
-    iIncpid = (int)(sptr->Proportion * iError //E[k]项
-    - sptr->Integral * sptr->LastError //E[k－1]项
-    + sptr->Derivative * sptr->PrevError); //E[k－2]项
+    iError = (int)(sptr->SetPoint - measured); //增量计算 
+    
+    iIncpid = (int)(sptr->Proportion * (iError-sptr->LastError) //E[k]项
+              + sptr->Integral * iError //E[k－1]项
+              + sptr->Derivative * (iError-2*sptr->LastError+sptr->PrevError)); //E[k－2]项
    
     //存储误差，用于下次计算
     sptr->PrevError = sptr->LastError;
+    
     sptr->LastError = iError;
     //返回增量值
     return(iIncpid);
 }
+/*
 void DrYL_Set_PID(int p,int i,int d,PID *sptr)
 {
     	sptr->Proportion=p;
 	sptr->Integral=	i;
 	sptr->Derivative=d;
-}
+}*/
 u16  dmp_times=0;
 /********************************************************************/
 /*******************************/
@@ -81,13 +85,13 @@ u8 DrYL_Get_Gesture(float *yaw,float *pitch, float *roll, float *accel)
            *pitch   =   asin(-2 * q1 * q3 + 2 * q0* q2)* 57.3; // pitch
            *roll    =   atan2(2 * q2 * q3 + 2 * q0 * q1, -2 * q1 * q1 - 2 * q2* q2 + 1)* 57.3; // roll
            //*yaw     =   atan2(2*(q1*q2 + q0*q3),q0*q0+q1*q1-q2*q2-q3*q3) * 57.3;	//yaw
-              ANBT_HMC5883L_MAG_Read_Data_FUN(hc5883_data);
-                x=(int)(hc5883_data[0]<<8|hc5883_data[1]);
-                z=(int)(hc5883_data[2]<<8|hc5883_data[3]);
-                y=(int)(hc5883_data[4]<<8|hc5883_data[5]);
-                if(x>0x7fff)x-=0xffff;
-                if(y>0x7fff)y-=0xffff;
-                *yaw=atan2((float)y,(float)x)*57.3+180;
+            ANBT_HMC5883L_MAG_Read_Data_FUN(hc5883_data);
+            x=(int)(hc5883_data[0]<<8|hc5883_data[1]);
+            z=(int)(hc5883_data[2]<<8|hc5883_data[3]);
+            y=(int)(hc5883_data[4]<<8|hc5883_data[5]);
+            if(x>0x7fff)x-=0xffff;
+            if(y>0x7fff)y-=0xffff;
+            *yaw=atan2((float)y,(float)x)*57.3+180;
            /*********************************************************/
           //  加速度处理
            accel[0]=accel1[0]/32768.0*2;
@@ -173,7 +177,9 @@ void DrYL_Median_Filter(float *bArry,  float *bArry_new, u8 iDataLen )
 	}
 }
 
-/********************************************************************/
+/******************************************************************
+//更新传感器的数据
+**/
 void DrYL_Updata_Sensor(float *sen, u8 len,float sen_new)
 {
     u8 i;
@@ -209,41 +215,38 @@ u8 DrYL_PID_Control_pitch_roll(void)
         if(MPU6050_Tim_1ms>10)
         {
         	MPU6050_Tim_1ms=0;
-           	DrYL_Get_Gesture(&Yaw,&Pitch,&Roll,accel_actual); //获取姿态和加速度
-            
-           	///DrYL_Updata_Sensor(yaw_table,DATA_LENGTH,Yaw);
-        	//DrYL_Updata_Sensor(pitch_table, DATA_LENGTH,Pitch);
-	 	//DrYL_Updata_Sensor(roll_table,DATA_LENGTH,Roll);    //数据更新
-	 	//DrYL_Median_Filter(yaw_table,yaw_table_filtered,DATA_LENGTH);
-		//DrYL_Median_Filter(pitch_table,pitch_table_filtered,DATA_LENGTH);
-		//DrYL_Median_Filter(roll_table,roll_table_filtered,DATA_LENGTH);
-	 	//DrYL_Send_Yaw(yaw_table_filtered[FILTER_LENGTH-2]);
-	      // DrYL_Send_Roll(roll_table_filtered[FILTER_LENGTH-2]);
-	      // DrYL_Send_Pitch(pitch_table_filtered[FILTER_LENGTH-2]);
-                DrYL_Send_Yaw(Yaw);
-                DrYL_Send_Pitch(Pitch);
-                DrYL_Send_Roll(Roll);
         }
         
-         if(TIM2_IRQCNT>10)
+        if(TIM2_IRQCNT>10)
         {
             TIM2_IRQCNT=0; 
-                     
+             
+            
+            DrYL_Get_Gesture(&Yaw,&Pitch,&Roll,accel_actual); //获取姿态和加速度
+        
+            DrYL_Send_Yaw(Yaw);
+            DrYL_Send_Pitch(Pitch);
+            DrYL_Send_Roll(Roll);
+            
             DrYL_Send_Moto(Moto_X_Positive,Moto_X_Negative,Moto_Y_Positive,Moto_Y_Negative);
-            DrYL_Set_PID(2,0,0,&pitch_pid);//设置pitch  pid参数
-            DrYL_Set_PID(2,0,0,&roll_pid);//设置roll  pid 参数
-            pitch_pid_result=DrYL_IncPID_Calc(Pitch,&pitch_pid); // 计算增量型参数
-            roll_pid_result=DrYL_IncPID_Calc(Roll,&roll_pid); //
+         
+           // DrYL_Set_PID(1,0,0,&pitch_pid);//设置pitch  pid参数
+           // DrYL_Set_PID(1,0,0,&roll_pid);//设置roll  pid 参数
+            DrYL_IncPIDInit(&pitch_pid,2,0,0);
+            DrYL_IncPIDInit(&roll_pid,2,0,0);
+            pitch_pid_result=DrYL_IncPID_Calc(&pitch_pid,Pitch,0); // 计算增量型参数
+            roll_pid_result=DrYL_IncPID_Calc(&roll_pid,Roll,0); //
             // 一个调节周期之内不会让它一直上升,只调节一对电机，另一对电机作为参考 
-            if((pitch_pid.LastError<1)&&(pitch_pid.LastError>-1))
+            if((pitch_pid.LastError<PID_DEAD_AREA )&&(pitch_pid.LastError>-PID_DEAD_AREA ))// 死区
             {
                     
             }
             else
             {
                    Moto_X_Negative+=pitch_pid_result;
+                   Moto_X_Positive-=pitch_pid_result;
             }
-            if((roll_pid.LastError<1)&&(roll_pid.LastError>-1))
+            if((roll_pid.LastError<PID_DEAD_AREA )&&(roll_pid.LastError>-PID_DEAD_AREA )) //死区
             {
                      
             }
@@ -251,11 +254,12 @@ u8 DrYL_PID_Control_pitch_roll(void)
             {  
               
                     Moto_Y_Negative+=roll_pid_result;
+                    Moto_Y_Positive-=roll_pid_result;
             }	
             
-            if(Moto_X_Positive   > Moto_PwmMax_Debug)	Moto_X_Positive    = Moto_PwmMax_Debug;
-            if(Moto_X_Negative   > Moto_PwmMax_Debug)	Moto_X_Negative    = Moto_PwmMax_Debug;
-            if(Moto_Y_Positive   > Moto_PwmMax_Debug)	Moto_Y_Positive    = Moto_PwmMax_Debug;
+            if(Moto_X_Positive   > Moto_PwmMax_Debug)	    Moto_X_Positive    = Moto_PwmMax_Debug;
+            if(Moto_X_Negative   > Moto_PwmMax_Debug)	    Moto_X_Negative    = Moto_PwmMax_Debug;
+            if(Moto_Y_Positive   > Moto_PwmMax_Debug)	    Moto_Y_Positive    = Moto_PwmMax_Debug;
             if(Moto_Y_Negative   > Moto_PwmMax_Debug)       Moto_Y_Negative    = Moto_PwmMax_Debug;
             if(Moto_X_Positive   <=Moto_PwmMin_Debug)       Moto_X_Positive    = Moto_PwmMin_Debug;
             if(Moto_X_Negative   <=Moto_PwmMin_Debug)       Moto_X_Negative    = Moto_PwmMin_Debug;
@@ -268,4 +272,3 @@ u8 DrYL_PID_Control_pitch_roll(void)
 	
         return 0;
 }
-

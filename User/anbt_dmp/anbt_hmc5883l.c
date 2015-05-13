@@ -69,7 +69,7 @@ void ANBT_HMC5883L_MAG_Read_Data_FUN(u8 *hmc5883l_mag_data_buffer)
 {
 	u8 anbt_hmc5883l_mag_data_ready;
 	//	
-	AnBT_HMC5883L_Delay(10000);
+	//AnBT_HMC5883L_Delay(10000);
 	anbt_hmc5883l_mag_data_ready=ANBT_HMC5883L_MAG_Get_Status_FUN();
 	if(anbt_hmc5883l_mag_data_ready&0x01)
 	{

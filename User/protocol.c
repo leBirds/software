@@ -19,6 +19,7 @@ u8 DrYL_Send_Moto_PWM(u16 moto1,u16 moto2,u16 moto3,u16 moto4)
     DrYL_Uart3_Send_Uint(moto2);
     DrYL_Uart3_Send_Uint(moto3);
     DrYL_Uart3_Send_Uint(moto4);
+    return 0;
 }
 u8 com_read_flag=0;
 void AnBT_UART3_Interrupt(void)
