@@ -80,6 +80,7 @@ int main(void)
              DrYL_Send_Moto_PWM(Moto_X_Positive,Moto_X_Negative,Moto_Y_Positive,Moto_Y_Negative);
              delay_ms(100);
         }*/
+       // AnBT_Uart3_Send_Char('.');
 	while (1)
 	{
              DrYL_PID_Control_pitch_roll(); 

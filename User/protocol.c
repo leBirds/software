@@ -126,6 +126,48 @@ void DrYL_GetCommand(void)
 			case cmdRight:
 				
 			break;
+                        case cmdConfig:
+                            //DrYLSendOneFrameData();
+                        break;
+                  
+                        case cmdPID_Pitch_P_INC :
+                           DrYL_Pitch_PID_Inc_P();
+			break;
+			case cmdPID_Pitch_I_INC:
+                          DrYL_Pitch_PID_Inc_I();
+			break;
+			case cmdPID_Pitch_D_INC:
+                          DrYL_Pitch_PID_Inc_D();
+			break;
+			case cmdPID_Pitch_P_DEC:
+                          DrYL_Pitch_PID_Dec_P();
+			break;
+			case cmdPID_Pitch_I_DEC:
+                          DrYL_Pitch_PID_Dec_I();
+			break;
+			case cmdPID_Pitch_D_DEC:
+                          DrYL_Pitch_PID_Dec_D();
+			break;
+                        
+                        case cmdPID_Roll_P_INC :
+                          DrYL_Roll_PID_Inc_P();
+			break;
+			case cmdPID_Roll_I_INC:
+                          DrYL_Roll_PID_Inc_I();
+			break;
+			case cmdPID_Roll_D_INC:
+                           DrYL_Roll_PID_Inc_D();
+			break;
+			case cmdPID_Roll_P_DEC:
+                          DrYL_Roll_PID_Dec_P();
+			break;
+			case cmdPID_Roll_I_DEC:
+                          DrYL_Roll_PID_Dec_I();
+			break;
+			case cmdPID_Roll_D_DEC:
+                          DrYL_Roll_PID_Dec_D();
+			break;
+				
 		}
 		
 	}
@@ -271,4 +313,166 @@ void DrYL_Send_Moto(u16 xp ,u16 xn, u16 yp, u16 yn)
       DrYL_Send_Moto_XN_Data(xn);
       DrYL_Send_Moto_YP_Data(yp);
       DrYL_Send_Moto_YN_Data(yn);
+}
+/*
+void DrYL_Send_PID_INC_P(float d)
+{
+	AnBT_Uart3_Send_Char('D');
+}*/
+/****************************************************
+//
+//
+**************************************************/
+void DrYL_Pitch_PID_Inc_P(void)
+{
+   pitch_pid.Proportion+=0.1;
+}
+void DrYL_Pitch_PID_Inc_I(void)
+{
+   pitch_pid.Integral+=0.1;
+}
+void DrYL_Pitch_PID_Inc_D(void)
+{
+   pitch_pid.Derivative+=0.1;
+}
+/************************************************/
+void DrYL_Pitch_PID_Dec_P(void)
+{
+   pitch_pid.Proportion-=0.1;
+}
+void DrYL_Pitch_PID_Dec_I(void)
+{
+   pitch_pid.Integral-=0.1;
+}
+void DrYL_Pitch_PID_Dec_D(void)
+{
+   pitch_pid.Derivative-=0.1;
+}
+/**************************************************
+**************************************************/
+
+void DrYL_Roll_PID_Inc_P(void)
+{
+   roll_pid.Proportion+=0.1;
+}
+void DrYL_Roll_PID_Inc_I(void)
+{
+   roll_pid.Integral+=0.1;
+}
+void DrYL_Roll_PID_Inc_D(void)
+{
+   roll_pid.Derivative+=0.1;
+}
+/*************************************************************/
+void DrYL_Roll_PID_Dec_P(void)
+{
+   roll_pid.Proportion-=0.1;
+}
+void DrYL_Roll_PID_Dec_I(void)
+{
+   roll_pid.Integral-=0.1;
+}
+void DrYL_Roll_PID_Dec_D(void)
+{
+   roll_pid.Derivative-=0.1;
+}
+/*************************************************
+**************************************************/
+/*void DrYL_Send_PID_INC_I(float d)
+{
+
+}
+void DrYL_Send_Pitch_PID_INC_D(float d)
+{
+    
+}
+void DrYL_Send_Pitch_PID_DEC_P(float d)
+{
+}
+void DrYL_Send_Pitch_PID_DEC_I(float d)
+{
+}
+void DrYL_Send_PID_DEC_D(float d)
+{
+}*/
+/*
+void DrYL_Send_PID_Data(float d)
+{
+    bool sign_flag=0; //正负数标志位
+    if(d>=0) sign_flag=1;// 正数为1
+    else d=-d;
+    if(sign_flag==1)AnBT_Uart3_Send_Char('+');//第一位  符号位
+    else            AnBT_Uart3_Send_Char('-'); 
+    
+    
+}*/
+char frame=0;
+void DrYLSendOneFrameData(void)
+{
+  AnBT_Uart3_Send_Char('S');
+  switch(frame)
+  {
+  case 0:
+    AnBT_Uart3_Send_Char('1');
+    DrYL_Send_Sensor(Yaw); 
+    break;
+  case 1:
+    AnBT_Uart3_Send_Char('2');
+    DrYL_Send_Sensor(Roll);
+    break;
+  case 2:
+    AnBT_Uart3_Send_Char('3');
+    DrYL_Send_Sensor(Pitch);
+    break;
+  case 3:
+    AnBT_Uart3_Send_Char('4');
+    DrYL_Send_Moto_Data(Moto_X_Positive);
+    DrYL_Send_Moto_Data(' ');
+    break;
+  case 4:
+    AnBT_Uart3_Send_Char('5');
+    DrYL_Send_Moto_Data(Moto_X_Negative);
+    DrYL_Send_Moto_Data(' ');
+    break;
+  case 5:
+    AnBT_Uart3_Send_Char('6');
+    DrYL_Send_Moto_Data(Moto_Y_Positive);
+    DrYL_Send_Moto_Data(' ');
+    break;
+  case 6:
+    AnBT_Uart3_Send_Char('7');
+    DrYL_Send_Moto_Data(Moto_Y_Negative);
+    DrYL_Send_Moto_Data(' ');
+    break;
+  case 7:
+    AnBT_Uart3_Send_Char('8');
+    DrYL_Send_Sensor(pitch_pid.Proportion);
+    break;
+  case 8:
+    AnBT_Uart3_Send_Char('9');
+    DrYL_Send_Sensor(pitch_pid.Integral);
+    break;
+  case 9:
+    AnBT_Uart3_Send_Char('a');
+    DrYL_Send_Sensor(pitch_pid.Derivative);
+    break;
+  case 10:
+    AnBT_Uart3_Send_Char('b');
+    DrYL_Send_Sensor(roll_pid.Proportion);
+    break;
+  case 11:
+    AnBT_Uart3_Send_Char('c');
+    DrYL_Send_Sensor(roll_pid.Integral);
+    break;
+  case 12:
+    AnBT_Uart3_Send_Char('d');
+    DrYL_Send_Sensor(roll_pid.Derivative);
+    break;
+  defalut:
+    break;
+  }
+  frame++;
+  if(frame==13)frame=0;
+  AnBT_Uart3_Send_Char('E');
+ 
 }

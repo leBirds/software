@@ -19,7 +19,7 @@
           
           
           
-        <Column0>65</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
+        <Column0>119</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
       </Workspace>
       <Disassembly>
         
@@ -31,7 +31,7 @@
       
       
       
-    <Wnd1>
+    <Wnd0>
         <Tabs>
           <Tab>
             <Identity>TabID-28735-3812</Identity>
@@ -47,7 +47,7 @@
           </Tab>
         </Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd1><Wnd3>
+      <SelectedTab>0</SelectedTab></Wnd0><Wnd2>
         <Tabs>
           <Tab>
             <Identity>TabID-6715-3815</Identity>
@@ -59,25 +59,25 @@
           </Tab>
         </Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd3><Wnd6><Tabs><Tab><Identity>TabID-21855-7016</Identity><TabName>Watch</TabName><Factory>Watch</Factory><Session><Expressions><Expression><Expression>duty</Expression></Expression><Expression><Expression>b</Expression></Expression><Expression><Expression>acc_x_h</Expression></Expression><Expression><Expression>acc_x_l</Expression></Expression><Expression><Expression>acc_y_h</Expression></Expression><Expression><Expression>acc_y_l</Expression></Expression><Expression><Expression>acc_z_h</Expression></Expression><Expression><Expression>acc_z_l</Expression></Expression></Expressions><TabId>1</TabId><Column0>100</Column0><Column1>308</Column1><Column2>100</Column2><Column3>100</Column3></Session></Tab><Tab><Identity>TabID-30554-11007</Identity><TabName>Live Watch</TabName><Factory>StaticWatch</Factory><Session><Expressions><Expression><Expression>Pitch</Expression></Expression><Expression><Expression>Roll</Expression></Expression><Expression><Expression>Yaw</Expression></Expression><Expression><Expression>dmp_times</Expression></Expression><Expression><Expression>Moto_X_Positive</Expression></Expression><Expression><Expression>Moto_X_Negative</Expression></Expression><Expression><Expression>Moto_Y_Positive</Expression></Expression><Expression><Expression>Moto_Y_Negative</Expression></Expression><Expression><Expression>time_1ms_cnt</Expression></Expression><Expression><Expression>pitch_table_filtered</Expression></Expression><Expression><Expression>roll_table_filtered</Expression></Expression><Expression><Expression>yaw_table</Expression></Expression><Expression><Expression>hc5883_data</Expression></Expression><Expression><Expression>angel</Expression></Expression><Expression><Expression>x</Expression></Expression><Expression><Expression>y</Expression></Expression><Expression><Expression>z</Expression></Expression></Expressions><TabId>2</TabId><Column0>190</Column0><Column1>232</Column1><Column2>100</Column2><Column3>100</Column3></Session></Tab></Tabs><SelectedTab>1</SelectedTab></Wnd6><Wnd7><Tabs><Tab>
+      <SelectedTab>0</SelectedTab></Wnd2><Wnd4><Tabs><Tab><Identity>TabID-21855-7016</Identity><TabName>Watch</TabName><Factory>Watch</Factory><Session><Expressions><Expression><Expression>duty</Expression></Expression><Expression><Expression>b</Expression></Expression><Expression><Expression>acc_x_h</Expression></Expression><Expression><Expression>acc_x_l</Expression></Expression><Expression><Expression>acc_y_h</Expression></Expression><Expression><Expression>acc_y_l</Expression></Expression><Expression><Expression>acc_z_h</Expression></Expression><Expression><Expression>acc_z_l</Expression></Expression></Expressions><TabId>1</TabId><Column0>100</Column0><Column1>308</Column1><Column2>100</Column2><Column3>100</Column3></Session></Tab><Tab><Identity>TabID-30554-11007</Identity><TabName>Live Watch</TabName><Factory>StaticWatch</Factory><Session><Expressions><Expression><Expression>Pitch</Expression></Expression><Expression><Expression>Roll</Expression></Expression><Expression><Expression>Yaw</Expression></Expression><Expression><Expression>dmp_times</Expression></Expression><Expression><Expression>Moto_X_Positive</Expression></Expression><Expression><Expression>Moto_X_Negative</Expression></Expression><Expression><Expression>Moto_Y_Positive</Expression></Expression><Expression><Expression>Moto_Y_Negative</Expression></Expression><Expression><Expression>time_1ms_cnt</Expression></Expression><Expression><Expression>pitch_table_filtered</Expression></Expression><Expression><Expression>roll_table_filtered</Expression></Expression><Expression><Expression>yaw_table</Expression></Expression><Expression><Expression>hc5883_data</Expression></Expression><Expression><Expression>angel</Expression></Expression><Expression><Expression>x</Expression></Expression><Expression><Expression>y</Expression></Expression><Expression><Expression>z</Expression></Expression><Expression><Expression>pitch_pid</Expression></Expression><Expression><Expression>roll_pid</Expression></Expression><Expression><Expression>frame</Expression></Expression></Expressions><TabId>2</TabId><Column0>190</Column0><Column1>232</Column1><Column2>100</Column2><Column3>100</Column3></Session></Tab></Tabs><SelectedTab>1</SelectedTab></Wnd4><Wnd5><Tabs><Tab>
             <Identity>TabID-17464-3818</Identity>
             <TabName>Disassembly</TabName>
             <Factory>Disassembly</Factory>
             <Session/>
-          </Tab></Tabs><SelectedTab>0</SelectedTab></Wnd7></Windows>
+          </Tab></Tabs><SelectedTab>0</SelectedTab></Wnd5></Windows>
     <Editor>
       
       
       
       
-    <Pane/><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_dmp\anbt_hmc5883l.c</Filename><XPos>0</XPos><YPos>42</YPos><SelStart>2256</SelStart><SelEnd>2256</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\protocol.c</Filename><XPos>0</XPos><YPos>439</YPos><SelStart>11217</SelStart><SelEnd>11217</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\moto.c</Filename><XPos>0</XPos><YPos>95</YPos><SelStart>6034</SelStart><SelEnd>6034</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_i2c.c</Filename><XPos>0</XPos><YPos>143</YPos><SelStart>3380</SelStart><SelEnd>3380</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_dmp\anbt_dmp_driver.c</Filename><XPos>0</XPos><YPos>603</YPos><SelStart>34862</SelStart><SelEnd>34862</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>446</SelStart><SelEnd>446</SelEnd></Tab><ActiveTab>5</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_uart.c</Filename><XPos>0</XPos><YPos>172</YPos><SelStart>3966</SelStart><SelEnd>3966</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\library\src\stm32f10x_usart.c</Filename><XPos>0</XPos><YPos>857</YPos><SelStart>30826</SelStart><SelEnd>30826</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\control.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>672</SelStart><SelEnd>672</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\protocol.h</Filename><XPos>0</XPos><YPos>9</YPos><SelStart>2482</SelStart><SelEnd>2482</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\control.c</Filename><XPos>0</XPos><YPos>201</YPos><SelStart>5798</SelStart><SelEnd>5798</SelEnd></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
     <Positions>
       
       
       
       
       
-    <Top><Row0><Sizes><Toolbar-01120c88><key>iaridepm.enu1</key></Toolbar-01120c88></Sizes></Row0><Row1><Sizes><Toolbar-081a8058><key>armjlink.enu1</key></Toolbar-081a8058></Sizes></Row1></Top><Left><Row0><Sizes><Toolbar-081a7ec8><key>debuggergui.enu1</key></Toolbar-081a7ec8></Sizes></Row0><Row1><Sizes><Wnd3><Rect><Top>-2</Top><Left>23</Left><Bottom>533</Bottom><Right>181</Right><x>23</x><y>-2</y><xscreen>437</xscreen><yscreen>257</yscreen><sizeHorzCX>335123</sizeHorzCX><sizeHorzCY>353994</sizeHorzCY><sizeVertCX>121166</sizeVertCX><sizeVertCY>736915</sizeVertCY></Rect></Wnd3></Sizes></Row1><Row2><Sizes><Wnd7><Rect><Top>-2</Top><Left>179</Left><Bottom>533</Bottom><Right>338</Right><x>179</x><y>-2</y><xscreen>62</xscreen><yscreen>149</yscreen><sizeHorzCX>47546</sizeHorzCX><sizeHorzCY>205234</sizeHorzCY><sizeVertCX>121933</sizeVertCX><sizeVertCY>736915</sizeVertCY></Rect></Wnd7></Sizes></Row2></Left><Right><Row0><Sizes><Wnd6><Rect><Top>-2</Top><Left>-2</Left><Bottom>533</Bottom><Right>418</Right><x>-2</x><y>-2</y><xscreen>518</xscreen><yscreen>203</yscreen><sizeHorzCX>397239</sizeHorzCX><sizeHorzCY>279614</sizeHorzCY><sizeVertCX>322086</sizeVertCX><sizeVertCY>736915</sizeVertCY></Rect></Wnd6></Sizes></Row0></Right><Bottom><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>124</Bottom><Right>1306</Right><x>-2</x><y>-2</y><xscreen>1308</xscreen><yscreen>126</yscreen><sizeHorzCX>1003067</sizeHorzCX><sizeHorzCY>173554</sizeHorzCY><sizeVertCX>335123</sizeVertCX><sizeVertCY>353994</sizeVertCY></Rect></Wnd1></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+    <Top><Row0><Sizes><Toolbar-02616708><key>iaridepm.enu1</key></Toolbar-02616708></Sizes></Row0><Row1><Sizes><Toolbar-04375270><key>armjlink.enu1</key></Toolbar-04375270></Sizes></Row1></Top><Left><Row0><Sizes><Toolbar-04375338><key>debuggergui.enu1</key></Toolbar-04375338></Sizes></Row0><Row1><Sizes><Wnd2><Rect><Top>-2</Top><Left>23</Left><Bottom>777</Bottom><Right>218</Right><x>23</x><y>-2</y><xscreen>539</xscreen><yscreen>344</yscreen><sizeHorzCX>293094</sizeHorzCX><sizeHorzCY>339585</sizeHorzCY><sizeVertCX>106036</sizeVertCX><sizeVertCY>769003</sizeVertCY></Rect></Wnd2></Sizes></Row1><Row2><Sizes><Wnd5><Rect><Top>-2</Top><Left>216</Left><Bottom>777</Bottom><Right>413</Right><x>216</x><y>-2</y><xscreen>76</xscreen><yscreen>200</yscreen><sizeHorzCX>41327</sizeHorzCX><sizeHorzCY>197433</sizeHorzCY><sizeVertCX>107123</sizeVertCX><sizeVertCY>769003</sizeVertCY></Rect></Wnd5></Sizes></Row2></Left><Right><Row0><Sizes><Wnd4><Rect><Top>-2</Top><Left>-2</Left><Bottom>777</Bottom><Right>673</Right><x>-2</x><y>-2</y><xscreen>639</xscreen><yscreen>272</yscreen><sizeHorzCX>347471</sizeHorzCX><sizeHorzCY>268509</sizeHorzCY><sizeVertCX>367047</sizeVertCX><sizeVertCY>769003</sizeVertCY></Rect></Wnd4></Sizes></Row0></Right><Bottom><Row0><Sizes><Wnd0><Rect><Top>-2</Top><Left>-2</Left><Bottom>167</Bottom><Right>1841</Right><x>-2</x><y>-2</y><xscreen>1843</xscreen><yscreen>169</yscreen><sizeHorzCX>1002175</sizeHorzCX><sizeHorzCY>166831</sizeHorzCY><sizeVertCX>293094</sizeVertCX><sizeVertCY>339585</sizeVertCY></Rect></Wnd0></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
   </Desktop>
 </Project>
 

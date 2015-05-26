@@ -197,7 +197,8 @@ float Yaw=0.00;
 float Roll,Pitch;
 int a,b,c;
 
-PID pitch_pid, roll_pid;
+PID pitch_pid={0,0,2.0,0,0,0,0};
+PID roll_pid ={0,0,2.0,0,0,0,0};
 u8   pitch_pid_times=0;
 u8   roll_pid_times=0;
 
@@ -212,9 +213,10 @@ u8 get_sensor_times=0;
 u8 DrYL_PID_Control_pitch_roll(void)             
 {
         
-        if(MPU6050_Tim_1ms>10)
+        if(MPU6050_Tim_1ms>1)
         {
         	MPU6050_Tim_1ms=0;
+                DrYLSendOneFrameData();
         }
         
         if(TIM2_IRQCNT>10)
@@ -224,16 +226,16 @@ u8 DrYL_PID_Control_pitch_roll(void)
             
             DrYL_Get_Gesture(&Yaw,&Pitch,&Roll,accel_actual); //获取姿态和加速度
         
-            DrYL_Send_Yaw(Yaw);
-            DrYL_Send_Pitch(Pitch);
-            DrYL_Send_Roll(Roll);
-            
-            DrYL_Send_Moto(Moto_X_Positive,Moto_X_Negative,Moto_Y_Positive,Moto_Y_Negative);
+           // DrYL_Send_Yaw(Yaw);
+           // DrYL_Send_Pitch(Pitch);
+           // DrYL_Send_Roll(Roll);
+            //
+            //DrYL_Send_Moto(Moto_X_Positive,Moto_X_Negative,Moto_Y_Positive,Moto_Y_Negative);
          
            // DrYL_Set_PID(1,0,0,&pitch_pid);//设置pitch  pid参数
            // DrYL_Set_PID(1,0,0,&roll_pid);//设置roll  pid 参数
-            DrYL_IncPIDInit(&pitch_pid,2,0,0);
-            DrYL_IncPIDInit(&roll_pid,2,0,0);
+            DrYL_IncPIDInit(&pitch_pid,pitch_pid.Proportion,pitch_pid.Integral,pitch_pid.Derivative);
+            DrYL_IncPIDInit(&roll_pid,roll_pid.Proportion,roll_pid.Integral,roll_pid.Derivative);
             pitch_pid_result=DrYL_IncPID_Calc(&pitch_pid,Pitch,0); // 计算增量型参数
             roll_pid_result=DrYL_IncPID_Calc(&roll_pid,Roll,0); //
             // 一个调节周期之内不会让它一直上升,只调节一对电机，另一对电机作为参考 
@@ -252,7 +254,6 @@ u8 DrYL_PID_Control_pitch_roll(void)
             }
             else
             {  
-              
                     Moto_Y_Negative+=roll_pid_result;
                     Moto_Y_Positive-=roll_pid_result;
             }	

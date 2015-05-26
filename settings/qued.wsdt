@@ -2,49 +2,41 @@
 
 <Workspace>
   <ConfigDictionary>
-    <CurrentConfigs>
-      <Project>qued/Debug</Project>
-    </CurrentConfigs>
-  </ConfigDictionary>
+    
+  <CurrentConfigs><Project>qued/Debug</Project></CurrentConfigs></ConfigDictionary>
   <Desktop>
     <Static>
       <Workspace>
         <ColumnWidths>
-          <Column0>232</Column0>
-          <Column1>27</Column1>
-          <Column2>27</Column2>
-          <Column3>27</Column3>
-        </ColumnWidths>
+          
+          
+          
+          
+        <Column0>272</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
       </Workspace>
       <Build>
-        <ColumnWidth0>20</ColumnWidth0>
-        <ColumnWidth1>1349</ColumnWidth1>
-        <ColumnWidth2>359</ColumnWidth2>
-        <ColumnWidth3>89</ColumnWidth3>
-      </Build>
-    </Static>
+        
+        
+        
+        
+      <ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1349</ColumnWidth1><ColumnWidth2>359</ColumnWidth2><ColumnWidth3>89</ColumnWidth3></Build>
+    <TerminalIO/></Static>
     <Windows>
-      <Wnd0>
+      
+      
+    <Wnd2>
         <Tabs>
           <Tab>
             <Identity>TabID-12140-19286</Identity>
             <TabName>Workspace</TabName>
             <Factory>Workspace</Factory>
             <Session>
-              <NodeDict>
-                <ExpandedNode>qued</ExpandedNode>
-                <ExpandedNode>qued/StartUp</ExpandedNode>
-                <ExpandedNode>qued/User</ExpandedNode>
-                <ExpandedNode>qued/User/dmp</ExpandedNode>
-                <ExpandedNode>qued/User/inc</ExpandedNode>
-                <ExpandedNode>qued/User/src</ExpandedNode>
-              </NodeDict>
-            </Session>
+              
+            <NodeDict><ExpandedNode>qued</ExpandedNode><ExpandedNode>qued/StartUp</ExpandedNode><ExpandedNode>qued/User</ExpandedNode><ExpandedNode>qued/User/dmp</ExpandedNode><ExpandedNode>qued/User/inc</ExpandedNode><ExpandedNode>qued/User/src</ExpandedNode></NodeDict></Session>
           </Tab>
         </Tabs>
-        <SelectedTab>0</SelectedTab>
-      </Wnd0>
-      <Wnd1>
+        
+      <SelectedTab>0</SelectedTab></Wnd2><Wnd3>
         <Tabs>
           <Tab>
             <Identity>TabID-20923-20145</Identity>
@@ -53,148 +45,22 @@
             <Session/>
           </Tab>
         </Tabs>
-        <SelectedTab>0</SelectedTab>
-      </Wnd1>
-    </Windows>
+        
+      <SelectedTab>0</SelectedTab></Wnd3></Windows>
     <Editor>
-      <Pane>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\User\control.c</Filename>
-          <XPos>0</XPos>
-          <YPos>209</YPos>
-          <SelStart>4603</SelStart>
-          <SelEnd>4603</SelEnd>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\User\anbt_dmp\anbt_hmc5883l.c</Filename>
-          <XPos>0</XPos>
-          <YPos>42</YPos>
-          <SelStart>2256</SelStart>
-          <SelEnd>2256</SelEnd>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\User\protocol.c</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>745</SelStart>
-          <SelEnd>745</SelEnd>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\User\moto.c</Filename>
-          <XPos>0</XPos>
-          <YPos>6</YPos>
-          <SelStart>1422</SelStart>
-          <SelEnd>1422</SelEnd>
-        </Tab>
-        <ActiveTab>3</ActiveTab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\User\anbt_i2c.c</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>1301</SelStart>
-          <SelEnd>1301</SelEnd>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\User\anbt_dmp\anbt_dmp_driver.c</Filename>
-          <XPos>0</XPos>
-          <YPos>603</YPos>
-          <SelStart>7816</SelStart>
-          <SelEnd>7816</SelEnd>
-        </Tab>
-      </Pane>
-      <ActivePane>0</ActivePane>
-      <Pane>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\User\control.h</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>277</SelStart>
-          <SelEnd>277</SelEnd>
-        </Tab>
-        <ActiveTab>0</ActiveTab>
-      </Pane>
-      <Sizes>
-        <Pane>
-          <X>560747</X>
-          <Y>1000000</Y>
-        </Pane>
-        <Pane>
-          <X>439252</X>
-          <Y>1000000</Y>
-        </Pane>
-      </Sizes>
-      <SplitMode>4</SplitMode>
-    </Editor>
+      
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_dmp\anbt_hmc5883l.c</Filename><XPos>0</XPos><YPos>42</YPos><SelStart>2256</SelStart><SelEnd>2256</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\protocol.c</Filename><XPos>0</XPos><YPos>439</YPos><SelStart>11217</SelStart><SelEnd>11217</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\moto.c</Filename><XPos>0</XPos><YPos>95</YPos><SelStart>6034</SelStart><SelEnd>6034</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_i2c.c</Filename><XPos>0</XPos><YPos>143</YPos><SelStart>3380</SelStart><SelEnd>3380</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_dmp\anbt_dmp_driver.c</Filename><XPos>0</XPos><YPos>603</YPos><SelStart>34862</SelStart><SelEnd>34862</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>446</SelStart><SelEnd>446</SelEnd></Tab><ActiveTab>5</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_uart.c</Filename><XPos>0</XPos><YPos>172</YPos><SelStart>3966</SelStart><SelEnd>3966</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\library\src\stm32f10x_usart.c</Filename><XPos>0</XPos><YPos>857</YPos><SelStart>30826</SelStart><SelEnd>30826</SelEnd></Tab></Pane><Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\control.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>672</SelStart><SelEnd>672</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\protocol.h</Filename><XPos>0</XPos><YPos>9</YPos><SelStart>2482</SelStart><SelEnd>2482</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\control.c</Filename><XPos>0</XPos><YPos>201</YPos><SelStart>5798</SelStart><SelEnd>5798</SelEnd></Tab><ActiveTab>2</ActiveTab></Pane><ActivePane>1</ActivePane><Sizes><Pane><X>606162</X><Y>1000000</Y></Pane><Pane><X>393837</X><Y>1000000</Y></Pane></Sizes><SplitMode>4</SplitMode></Editor>
     <Positions>
-      <Top>
-        <Row0>
-          <Sizes>
-            <Toolbar-0107d758>
-              <key>iaridepm.enu1</key>
-            </Toolbar-0107d758>
-          </Sizes>
-        </Row0>
-      </Top>
-      <Left>
-        <Row0>
-          <Sizes>
-            <Wnd0>
-              <Rect>
-                <Top>-2</Top>
-                <Left>-2</Left>
-                <Bottom>768</Bottom>
-                <Right>306</Right>
-                <x>-2</x>
-                <y>-2</y>
-                <xscreen>200</xscreen>
-                <yscreen>200</yscreen>
-                <sizeHorzCX>107643</sizeHorzCX>
-                <sizeHorzCY>192678</sizeHorzCY>
-                <sizeVertCX>165770</sizeVertCX>
-                <sizeVertCY>741811</sizeVertCY>
-              </Rect>
-            </Wnd0>
-          </Sizes>
-        </Row0>
-      </Left>
-      <Right>
-        <Row0>
-          <Sizes/>
-        </Row0>
-      </Right>
-      <Bottom>
-        <Row0>
-          <Sizes>
-            <Wnd1>
-              <Rect>
-                <Top>-2</Top>
-                <Left>-2</Left>
-                <Bottom>225</Bottom>
-                <Right>1860</Right>
-                <x>-2</x>
-                <y>-2</y>
-                <xscreen>1862</xscreen>
-                <yscreen>227</yscreen>
-                <sizeHorzCX>1002153</sizeHorzCX>
-                <sizeHorzCY>218690</sizeHorzCY>
-                <sizeVertCX>107643</sizeVertCX>
-                <sizeVertCY>192678</sizeVertCY>
-              </Rect>
-            </Wnd1>
-          </Sizes>
-        </Row0>
-      </Bottom>
-      <Float>
-        <Sizes/>
-      </Float>
-    </Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-02616708><key>iaridepm.enu1</key></Toolbar-02616708></Sizes></Row0><Row1><Sizes/></Row1></Top><Left><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>733</Bottom><Right>363</Right><x>-2</x><y>-2</y><xscreen>228</xscreen><yscreen>208</yscreen><sizeHorzCX>123980</sizeHorzCX><sizeHorzCY>205331</sizeHorzCY><sizeVertCX>198477</sizeVertCX><sizeVertCY>725568</sizeVertCY></Rect></Wnd2></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>235</Bottom><Right>1841</Right><x>-2</x><y>-2</y><xscreen>1843</xscreen><yscreen>237</yscreen><sizeHorzCX>1002175</sizeHorzCX><sizeHorzCY>233959</sizeHorzCY><sizeVertCX>123980</sizeVertCX><sizeVertCY>205331</sizeVertCY></Rect></Wnd3></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
   </Desktop>
 </Workspace>
 

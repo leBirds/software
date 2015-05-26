@@ -23,6 +23,9 @@ extern u8 DrYL_PID_Control_pitch_roll(void);
 
 extern PID pitch_pid, roll_pid;
 
+extern float Yaw;
+extern float Roll,Pitch;
+
 
 //extern void DrYL_IncPIDInit(PID sptr);
 extern u16 dmp_times;
