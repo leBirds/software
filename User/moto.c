@@ -1,5 +1,5 @@
 #include "includes.h"
-
+char StartFlag=0;
 void Tim3_init(void)
 {
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
@@ -137,6 +137,7 @@ void DrYL_Motor_Stop(void)
         Moto_X_Negative   = Moto_PwmMin;
         Moto_Y_Positive   = Moto_PwmMin;
         Moto_Y_Negative   = Moto_PwmMin;
+        StartFlag=0;
 	 MotoPWMControl(Moto_X_Positive,Moto_X_Negative,Moto_Y_Positive,Moto_Y_Negative);
 }
 
@@ -146,6 +147,7 @@ void DrYL_Moto_Start(void)
         Moto_X_Negative  = 999;//(Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
         Moto_Y_Positive    = 999;//(Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
         Moto_Y_Negative  = 999;//(Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
+        StartFlag=1;
 	 MotoPWMControl(Moto_X_Positive,Moto_X_Negative,Moto_Y_Positive,Moto_Y_Negative);
 }
 void DrYL_Moto_Top(void)

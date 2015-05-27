@@ -12,7 +12,7 @@
           
           
           
-        <Column0>211</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
+        <Column0>151</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
       </Workspace>
       <Build>
         
@@ -20,7 +20,7 @@
         
         
       <PreferedWindows><Position>3</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows/></PreferedWindows><ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1349</ColumnWidth1><ColumnWidth2>359</ColumnWidth2><ColumnWidth3>89</ColumnWidth3></Build>
-    <TerminalIO/></Static>
+    <TerminalIO/><Debug-Log><ColumnWidth0>25</ColumnWidth0><ColumnWidth1>1794</ColumnWidth1></Debug-Log></Static>
     <Windows>
       
       
@@ -36,21 +36,21 @@
           </Tab>
         </Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd0><Wnd1><Tabs><Tab><Identity>TabID-8761-10241</Identity><TabName>Build</TabName><Factory>Build</Factory><Session/></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd1></Windows>
+      <SelectedTab>0</SelectedTab></Wnd0><Wnd1><Tabs><Tab><Identity>TabID-8761-10241</Identity><TabName>Build</TabName><Factory>Build</Factory><Session/></Tab><Tab><Identity>TabID-20146-32730</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd1></Windows>
     <Editor>
       
       
       
       
       
-    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_dmp\anbt_hmc5883l.c</Filename><XPos>0</XPos><YPos>42</YPos><SelStart>2256</SelStart><SelEnd>2256</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\protocol.c</Filename><XPos>0</XPos><YPos>439</YPos><SelStart>11217</SelStart><SelEnd>11217</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\moto.c</Filename><XPos>0</XPos><YPos>95</YPos><SelStart>6034</SelStart><SelEnd>6034</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\control.c</Filename><XPos>0</XPos><YPos>222</YPos><SelStart>4390</SelStart><SelEnd>4390</SelEnd></Tab><ActiveTab>3</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_i2c.c</Filename><XPos>0</XPos><YPos>143</YPos><SelStart>3380</SelStart><SelEnd>3380</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_dmp\anbt_dmp_driver.c</Filename><XPos>0</XPos><YPos>1168</YPos><SelStart>51632</SelStart><SelEnd>51632</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\main.c</Filename><XPos>0</XPos><YPos>56</YPos><SelStart>1421</SelStart><SelEnd>1421</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_uart.c</Filename><XPos>0</XPos><YPos>172</YPos><SelStart>3966</SelStart><SelEnd>3966</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\library\src\stm32f10x_usart.c</Filename><XPos>0</XPos><YPos>857</YPos><SelStart>30826</SelStart><SelEnd>30826</SelEnd></Tab></Pane><ActivePane>0</ActivePane><Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\control.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>383</SelStart><SelEnd>383</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\protocol.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>802</SelStart><SelEnd>802</SelEnd></Tab><ActiveTab>1</ActiveTab></Pane><Sizes><Pane><X>574793</X><Y>1000000</Y></Pane><Pane><X>425206</X><Y>1000000</Y></Pane></Sizes><SplitMode>4</SplitMode></Editor>
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_dmp\anbt_hmc5883l.c</Filename><XPos>0</XPos><YPos>42</YPos><SelStart>2256</SelStart><SelEnd>2256</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\protocol.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>1830</SelStart><SelEnd>1830</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\moto.c</Filename><XPos>0</XPos><YPos>120</YPos><SelStart>5932</SelStart><SelEnd>5932</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\control.c</Filename><XPos>0</XPos><YPos>219</YPos><SelStart>7093</SelStart><SelEnd>7093</SelEnd></Tab><ActiveTab>3</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_i2c.c</Filename><XPos>0</XPos><YPos>143</YPos><SelStart>3380</SelStart><SelEnd>3380</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_dmp\anbt_dmp_driver.c</Filename><XPos>0</XPos><YPos>1168</YPos><SelStart>51632</SelStart><SelEnd>51632</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\anbt_uart.c</Filename><XPos>0</XPos><YPos>172</YPos><SelStart>3966</SelStart><SelEnd>3966</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\main.c</Filename><XPos>0</XPos><YPos>21</YPos><SelStart>1340</SelStart><SelEnd>1340</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\library\src\stm32f10x_usart.c</Filename><XPos>0</XPos><YPos>857</YPos><SelStart>30826</SelStart><SelEnd>30826</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\moto.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>450</SelStart><SelEnd>450</SelEnd></Tab></Pane><ActivePane>0</ActivePane><Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\control.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>419</SelStart><SelEnd>419</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\User\protocol.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>76</SelStart><SelEnd>76</SelEnd></Tab><ActiveTab>1</ActiveTab></Pane><Sizes><Pane><X>563458</X><Y>1000000</Y></Pane><Pane><X>436541</X><Y>1000000</Y></Pane></Sizes><SplitMode>4</SplitMode></Editor>
     <Positions>
       
       
       
       
       
-    <Top><Row0><Sizes><Toolbar-00190370><key>iaridepm.enu1</key></Toolbar-00190370></Sizes></Row0></Top><Left><Row0><Sizes><Wnd0><Rect><Top>-2</Top><Left>-2</Left><Bottom>795</Bottom><Right>285</Right><x>-2</x><y>-2</y><xscreen>230</xscreen><yscreen>213</yscreen><sizeHorzCX>123789</sizeHorzCX><sizeHorzCY>205202</sizeHorzCY><sizeVertCX>154467</sizeVertCX><sizeVertCY>767823</sizeVertCY></Rect></Wnd0></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>198</Bottom><Right>1860</Right><x>-2</x><y>-2</y><xscreen>1862</xscreen><yscreen>200</yscreen><sizeHorzCX>1002153</sizeHorzCX><sizeHorzCY>192678</sizeHorzCY><sizeVertCX>107643</sizeVertCX><sizeVertCY>192678</sizeVertCY></Rect></Wnd1></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+    <Top><Row0><Sizes><Toolbar-0027eee8><key>iaridepm.enu1</key></Toolbar-0027eee8></Sizes></Row0><Row1><Sizes/></Row1></Top><Left><Row0><Sizes><Wnd0><Rect><Top>-2</Top><Left>-2</Left><Bottom>861</Bottom><Right>225</Right><x>-2</x><y>-2</y><xscreen>230</xscreen><yscreen>213</yscreen><sizeHorzCX>123789</sizeHorzCX><sizeHorzCY>205202</sizeHorzCY><sizeVertCX>122174</sizeVertCX><sizeVertCY>831407</sizeVertCY></Rect></Wnd0></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>132</Bottom><Right>1860</Right><x>-2</x><y>-2</y><xscreen>1862</xscreen><yscreen>134</yscreen><sizeHorzCX>1002153</sizeHorzCX><sizeHorzCY>129094</sizeHorzCY><sizeVertCX>107643</sizeVertCX><sizeVertCY>192678</sizeVertCY></Rect></Wnd1></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
   </Desktop>
 </Workspace>
 

@@ -1,7 +1,7 @@
 #ifndef _DRYL_PROTOCOL_H__
 #define _DRYL_PROTOCOL_H__
 
-
+extern char StartFlag;
 
 extern u8 DrYL_Send_Moto_PWM(u16 moto1,u16 moto2,u16 moto3,u16 moto4);
 extern void AnBT_UART3_Interrupt(void);

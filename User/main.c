@@ -83,8 +83,16 @@ int main(void)
        // AnBT_Uart3_Send_Char('.');
 	while (1)
 	{
-             DrYL_PID_Control_pitch_roll(); 
+             if(StartFlag==1)
+             {
+                DrYL_PID_Control_pitch_roll();
+             }
              DrYL_GetCommand();
+             if(MPU6050_Tim_1ms>1)
+             {
+        	MPU6050_Tim_1ms=0;
+                DrYLSendOneFrameData(); //解析命令，发送数据
+             }
             /* if(time_1ms_cnt>5000)
              { 
                     time_1ms_cnt=0;

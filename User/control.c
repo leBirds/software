@@ -22,9 +22,6 @@ Initialize PID Structure PID参数初始化
 void DrYL_IncPIDInit(PID *sptr,const float kp,
                      const float ki,const float kd)
 {
-    sptr->SumError = 0; 
-    sptr->LastError = 0; //Error[-1]   
-    sptr->PrevError = 0; //Error[-2]
     sptr->Proportion = kp; //比例常数 Proportional Const
     sptr->Integral = ki; //积分常数Integral Const
     sptr->Derivative = kd; //微分常数 Derivative Const
@@ -46,9 +43,11 @@ int DrYL_IncPID_Calc(PID *sptr,const float measured,float expect)
               + sptr->Derivative * (iError-2*sptr->LastError+sptr->PrevError)); //E[k－2]项
    
     //存储误差，用于下次计算
+    
     sptr->PrevError = sptr->LastError;
     
     sptr->LastError = iError;
+    
     //返回增量值
     return(iIncpid);
 }
@@ -199,8 +198,8 @@ float Yaw=0.00;
 float Roll,Pitch;
 int a,b,c;
 
-PID pitch_pid={0,0,0.2,0,0,0,0};
-PID roll_pid ={0,0,0.2,0,0,0,0};
+PID pitch_pid={0,0,2.0,0,4.0,0,0};
+PID roll_pid ={0,0,2.0,0,4.0,0,0};
 u8   pitch_pid_times=0;
 u8   roll_pid_times=0;
 
@@ -215,11 +214,7 @@ u8 get_sensor_times=0;
 u8 DrYL_PID_Control_pitch_roll(void)             
 {
         
-        if(MPU6050_Tim_1ms>1)
-        {
-        	MPU6050_Tim_1ms=0;
-                DrYLSendOneFrameData();
-        }
+       
         
         if(TIM2_IRQCNT>10)
         {
