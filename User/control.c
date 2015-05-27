@@ -37,8 +37,9 @@ void DrYL_IncPIDInit(PID *sptr,const float kp,
  
 int DrYL_IncPID_Calc(PID *sptr,const float measured,float expect)
 { 
-    int iError, iIncpid; //当前误差   
-    iError = (int)(sptr->SetPoint - measured); //增量计算 
+    float iError; //当前误差   
+    int   iIncpid;
+    iError = (sptr->SetPoint - measured); //增量计算 
     
     iIncpid = (int)(sptr->Proportion * (iError-sptr->LastError) //E[k]项
               + sptr->Integral * iError //E[k－1]项
@@ -64,10 +65,11 @@ u16  dmp_times=0;
 char hc5883_data[6];
 int x,y,z;
 float angel;
+short gyro1[3];
 /**************************/
 u8 DrYL_Get_Gesture(float *yaw,float *pitch, float *roll, float *accel)
 {
-       short gyro1[3], accel1[3], sensors1;
+       short accel1[3], sensors1;
        unsigned long sensor_timestamp1;
        long quat1[4];
        unsigned char more1;
@@ -197,8 +199,8 @@ float Yaw=0.00;
 float Roll,Pitch;
 int a,b,c;
 
-PID pitch_pid={0,0,2.0,0,0,0,0};
-PID roll_pid ={0,0,2.0,0,0,0,0};
+PID pitch_pid={0,0,0.2,0,0,0,0};
+PID roll_pid ={0,0,0.2,0,0,0,0};
 u8   pitch_pid_times=0;
 u8   roll_pid_times=0;
 
@@ -245,8 +247,8 @@ u8 DrYL_PID_Control_pitch_roll(void)
             }
             else
             {
-                   Moto_X_Negative+=pitch_pid_result;
-                   Moto_X_Positive-=pitch_pid_result;
+                   Moto_X_Negative-=pitch_pid_result;
+                   Moto_X_Positive+=pitch_pid_result;
             }
             if((roll_pid.LastError<PID_DEAD_AREA )&&(roll_pid.LastError>-PID_DEAD_AREA )) //死区
             {
@@ -254,8 +256,8 @@ u8 DrYL_PID_Control_pitch_roll(void)
             }
             else
             {  
-                    Moto_Y_Negative+=roll_pid_result;
-                    Moto_Y_Positive-=roll_pid_result;
+                    Moto_Y_Negative-=roll_pid_result;
+                    Moto_Y_Positive+=roll_pid_result;
             }	
             
             if(Moto_X_Positive   > Moto_PwmMax_Debug)	    Moto_X_Positive    = Moto_PwmMax_Debug;
