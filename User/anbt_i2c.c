@@ -24,7 +24,7 @@ void ANBT_I2C_Configuration(void)
         GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;   //圆点博士:设置I2C口最大允许输出速度
         GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;	  //圆点博士:设置I2C为开漏输出
         GPIO_Init(AnBT_MPU6050_INT_PORT, &GPIO_InitStructure); 
-	//*/
+	*/
 	ANBT_I2C_SCL_1; 
 	ANBT_I2C_SDA_1;
 	ANBT_I2C_DELAY;
@@ -343,3 +343,56 @@ void AnBT_DMP_Delay_ms(u32 dly)
 	while(dly--) AnBT_DMP_Delay_us(1000);
 }
 //
+/*bool I2C_WaitAck(void)
+{
+    ANBT_I2C_SCL_0;
+    ANBT_I2C_NOP;
+    ANBT_I2C_SDA_1;
+    ANBT_I2C_NOP;
+    ANBT_I2C_SCL_1;
+    ANBT_I2C_NOP;
+    if (ANBT_I2C_SDA_STATE) 
+    {
+        ANBT_I2C_SCL_0;
+        return false;
+    }
+    ANBT_I2C_SCL_0;
+    return true;
+}
+u8 I2C_ReceiveByte(void)
+{
+    u8 i = 8;
+    u8 byte = 0;
+
+    ANBT_I2C_SDA_1;
+    while (i--) {
+        byte <<= 1;
+        ANBT_I2C_SCL_0;
+        ANBT_I2C_NOP;
+        ANBT_I2C_SCL_1;
+        ANBT_I2C_NOP;
+        if (ANBT_I2C_SDA_STATE) {
+            byte |= 0x01;
+        }
+    }
+    ANBT_I2C_SCL_0;
+    return byte;
+}
+u8 DrYL_Read_MPU6050_ONE_Byte(u8 dev_addr,u8 reg_addr)
+{
+    u8 dryl_data;
+	//
+    ANBT_I2C_START();
+    ANBT_I2C_SendByte(dev_addr<<1|I2C_Direction_Transmitter);			//圆点博士:发送陀螺仪写地址
+    I2C_WaitAck();
+    ANBT_I2C_SendByte(reg_addr);  //圆点博士:发送陀螺仪ID地址
+    I2C_WaitAck();
+    ANBT_I2C_START();
+    ANBT_I2C_SendByte(dev_addr<<1|I2C_Direction_Receiver);      //圆点博士:发送陀螺仪读地址
+    I2C_WaitAck();
+    dryl_data=I2C_ReceiveByte();				//圆点博士:读出陀螺仪ID
+    ANBT_I2C_SendACK();
+    ANBT_I2C_STOP();
+    //
+    return dryl_data;
+}*/

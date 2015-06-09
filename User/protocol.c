@@ -176,7 +176,7 @@ void DrYL_GetCommand(void)
 
 float DrYL_Abs(float d)
 {
-    if(d>0)return d;
+    if(d>=0)return d;
     else   return (-d);
 }
 void DrYL_Send_Sensor(float y)
@@ -325,56 +325,56 @@ void DrYL_Send_PID_INC_P(float d)
 **************************************************/
 void DrYL_Pitch_PID_Inc_P(void)
 {
-   pitch_pid.Proportion+=0.1;
+   pitch_pid_new.Proportion+=CHANGE_NUMBER;
 }
 void DrYL_Pitch_PID_Inc_I(void)
 {
-   pitch_pid.Integral+=0.1;
+   pitch_pid_new.Integral+=CHANGE_NUMBER;
 }
 void DrYL_Pitch_PID_Inc_D(void)
 {
-   pitch_pid.Derivative+=0.1;
+   pitch_pid_new.Derivative+=CHANGE_NUMBER;
 }
 /************************************************/
 void DrYL_Pitch_PID_Dec_P(void)
 {
-   pitch_pid.Proportion-=0.1;
+   pitch_pid_new.Proportion-=CHANGE_NUMBER;
 }
 void DrYL_Pitch_PID_Dec_I(void)
 {
-   pitch_pid.Integral-=0.1;
+   pitch_pid_new.Integral-=CHANGE_NUMBER;
 }
 void DrYL_Pitch_PID_Dec_D(void)
 {
-   pitch_pid.Derivative-=0.1;
+   pitch_pid_new.Derivative-=CHANGE_NUMBER;
 }
 /**************************************************
 **************************************************/
 
 void DrYL_Roll_PID_Inc_P(void)
 {
-   roll_pid.Proportion+=0.1;
+   roll_pid_new.Proportion+=CHANGE_NUMBER;
 }
 void DrYL_Roll_PID_Inc_I(void)
 {
-   roll_pid.Integral+=0.1;
+   roll_pid_new.Integral+=CHANGE_NUMBER;
 }
 void DrYL_Roll_PID_Inc_D(void)
 {
-   roll_pid.Derivative+=0.1;
+   roll_pid_new.Derivative+=CHANGE_NUMBER;
 }
 /*************************************************************/
 void DrYL_Roll_PID_Dec_P(void)
 {
-   roll_pid.Proportion-=0.1;
+   roll_pid_new.Proportion-=CHANGE_NUMBER;
 }
 void DrYL_Roll_PID_Dec_I(void)
 {
-   roll_pid.Integral-=0.1;
+   roll_pid_new.Integral-=CHANGE_NUMBER;
 }
 void DrYL_Roll_PID_Dec_D(void)
 {
-   roll_pid.Derivative-=0.1;
+   roll_pid_new.Derivative-=CHANGE_NUMBER;
 }
 /*************************************************
 **************************************************/
@@ -414,15 +414,15 @@ void DrYLSendOneFrameData(void)
   {
   case 0:
     AnBT_Uart3_Send_Char('1');
-    DrYL_Send_Sensor(Yaw); 
+    DrYL_Send_Sensor(yaw_filter); 
     break;
   case 1:
     AnBT_Uart3_Send_Char('2');
-    DrYL_Send_Sensor(Roll);
+    DrYL_Send_Sensor(roll_filter);
     break;
   case 2:
     AnBT_Uart3_Send_Char('3');
-    DrYL_Send_Sensor(Pitch);
+    DrYL_Send_Sensor(pitch_filter);
     break;
   case 3:
     AnBT_Uart3_Send_Char('4');
@@ -446,29 +446,29 @@ void DrYLSendOneFrameData(void)
     break;
   case 7:
     AnBT_Uart3_Send_Char('8');
-    DrYL_Send_Sensor(pitch_pid.Proportion);
+    DrYL_Send_Sensor(pitch_pid_new.Proportion);
     break;
   case 8:
     AnBT_Uart3_Send_Char('9');
-    DrYL_Send_Sensor(pitch_pid.Integral);
+    DrYL_Send_Sensor(pitch_pid_new.Integral);
     break;
   case 9:
     AnBT_Uart3_Send_Char('a');
-    DrYL_Send_Sensor(pitch_pid.Derivative);
+    DrYL_Send_Sensor(pitch_pid_new.Derivative);
     break;
   case 10:
     AnBT_Uart3_Send_Char('b');
-    DrYL_Send_Sensor(roll_pid.Proportion);
+    DrYL_Send_Sensor(roll_pid_new.Proportion);
     break;
   case 11:
     AnBT_Uart3_Send_Char('c');
-    DrYL_Send_Sensor(roll_pid.Integral);
+    DrYL_Send_Sensor(roll_pid_new.Integral);
     break;
   case 12:
     AnBT_Uart3_Send_Char('d');
-    DrYL_Send_Sensor(roll_pid.Derivative);
+    DrYL_Send_Sensor(roll_pid_new.Derivative);
     break;
-  defalut:
+  default:
     break;
   }
   frame++;

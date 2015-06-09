@@ -51,6 +51,6 @@ extern u8 AnBT_DMP_I2C_Write(u8 anbt_dev_addr, u8 anbt_reg_addr, u8 anbt_i2c_len
 extern u8 AnBT_DMP_I2C_Read(u8 anbt_dev_addr, u8 anbt_reg_addr, u8 anbt_i2c_len, u8 *anbt_i2c_data_buf);
 extern void AnBT_DMP_Delay_us(u32 dly);
 extern void AnBT_DMP_Delay_ms(u32 dly);
-
-
+/**************************************/
+extern u8 DrYL_Read_MPU6050_ONE_Byte(u8 dev_addr,u8 reg_addr);
 #endif

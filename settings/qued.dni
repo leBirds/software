@@ -11,7 +11,7 @@ ActionState=1
 Enabled=0
 ShowSource=1
 [DebugChecksum]
-Checksum=-1486263450
+Checksum=1671224828
 [DisAssemblyWindow]
 NumStates=_ 1
 State 1=_ 1
@@ -68,6 +68,11 @@ ShowTimeLog=1
 ShowTimeSum=0
 Title0=Power [mA]
 Setup0=0 1 0 500 2 0 4 1 0
+[Disassemble mode]
+mode=0
+[Breakpoints]
+Bp0=_ "STD_CODE" "0x00000018" 0 0 0 0 "" 0 "" 0
+Count=1
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -75,6 +80,14 @@ Category=_ 0
 [TermIOLog]
 LoggingEnabled=_ 0
 LogFile=_ ""
+[Aliases]
+A0=_ "C:\Users\Administrator\Desktop\quad\software\quad_newVirson\software\User\main.c" ""
+A1=_ "C:\Users\Administrator\Desktop\quad\software\位置式\quad_newVirson\software\User\main.c" ""
+A2=_ "C:\Users\Administrator\Desktop\四旋翼\software\quad_V1.1\library\src\stm32f10x_tim.c" ""
+A3=_ "F:\quad_newVirson\software\User\main.c" ""
+A4=_ "J:\quad_newVirson\software\User\main.c" ""
+Count=5
+SuppressDialog=1
 [SWOTraceWindow]
 PcSampling=0
 InterruptLogs=0
@@ -94,12 +107,3 @@ Enabled=0
 Mode=3
 Graph=0
 Symbiont=0
-[Disassemble mode]
-mode=0
-[Breakpoints]
-Bp0=_ "STD_CODE" "0x00000018" 0 0 0 0 "" 0 "" 0
-Count=1
-[Aliases]
-A0=_ "C:\Users\Administrator\Desktop\四旋翼\software\quad_V1.1\library\src\stm32f10x_tim.c" ""
-Count=1
-SuppressDialog=1

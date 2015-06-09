@@ -11,6 +11,8 @@ float pitch_table[DATA_LENGTH]={0};
 float yaw_table_filtered[DATA_LENGTH]={0};
 float roll_table_filtered[DATA_LENGTH]={0};
 float pitch_table_filtered[DATA_LENGTH]={0};
+float gyro_pitch_table[DATA_LENGTH]={0};
+float gyro_roll_table[DATA_LENGTH]={0};
 
 
 //static PID *sptr = &sPID;
@@ -27,6 +29,8 @@ void DrYL_IncPIDInit(PID *sptr,const float kp,
     sptr->Derivative = kd; //微分常数 Derivative Const
     //sptr->SetPoint = desired; 
 }
+
+
  
 /*====================================================================================================
 增量式PID计算部分
@@ -51,24 +55,150 @@ int DrYL_IncPID_Calc(PID *sptr,const float measured,float expect)
     //返回增量值
     return(iIncpid);
 }
-/*
-void DrYL_Set_PID(int p,int i,int d,PID *sptr)
+// 位置式PID
+int DrYL_DoubleHoopPID_Calc(PID *sptr,const float measured,float expect,float gyro)
+{
+     float kp=5.0;float rate_error,dError;
+     float target_rate;
+     float angel_difference; 
+     int iError;
+     angel_difference= (expect - measured); // 角度差
+     if((angel_difference<PID_DEAD_AREA)&&(angel_difference>-PID_DEAD_AREA))
+     {
+        angel_difference=0;
+     }
+     if((angel_difference*kp) > ANGEL_LIMIT)
+     {
+        angel_difference = ANGEL_LIMIT;
+     }
+     if((angel_difference*kp) < -ANGEL_LIMIT)
+     {
+        angel_difference = -ANGEL_LIMIT;
+     }
+     
+     target_rate=angel_difference*kp;
+     //if(target_rate>30)
+     
+     rate_error = target_rate+gyro;   //P项
+     sptr->SumError+=rate_error;      //  I项
+     if(sptr->SumError > I_LIMIT) // I项限幅
+     {
+        sptr->SumError = I_LIMIT;
+     }
+     if(sptr->SumError < -I_LIMIT)
+     {
+        sptr->SumError = -I_LIMIT;
+     }
+     dError = (rate_error-sptr->LastError);
+     if(DrYL_Abs(angel_difference)<PID_DEAD_AREA)
+     {      
+         iError = (int)(sptr->Proportion*rate_error+
+                        sptr->Integral*sptr->SumError+
+                        sptr->Derivative*dError);
+     }
+     if(iError>SUM_LIMIT)
+     {
+        iError=SUM_LIMIT;
+     }
+     if(iError<-SUM_LIMIT)
+     {
+        iError=-SUM_LIMIT;
+     }
+     
+     sptr->PrevError = sptr->LastError;
+     sptr->LastError=rate_error; // 更新数据
+     
+     
+     return iError;
+}
+/***********************************************************************************
+*************************************************************************************/
+void DrYL_IncPIDInit_new(NewPID *sptr,const float kp,
+                     const float ki,const float kd)
+{
+    sptr->Proportion = kp; //比例常数 Proportional Const
+    sptr->Integral = ki; //积分常数Integral Const
+    sptr->Derivative = kd; //微分常数 Derivative Const
+    //sptr->SetPoint = desired; 
+}
+int pidUpdate(NewPID* pid, const float measured,float expect,float gyro)
+{
+      int output;
+    //  int lastoutput=0;
+    
+      pid->desired=expect;			 				//获取期望角度
+    
+      pid->Error = pid->desired - measured;	 	  //偏差：期望-测量值
+      
+      pid->SumError += pid->Error * IMU_UPDATE_DT;	  //偏差积分
+     
+      if (pid->SumError > I_LIMIT)				  //作积分限制
+      {
+        pid->SumError= I_LIMIT;
+      }
+      else if (pid->SumError < -I_LIMIT)
+      {
+        pid->SumError = -I_LIMIT;
+      }				 
+    
+     // pid->deriv = (pid->error - pid->prevError) / IMU_UPDATE_DT;		//微分	 应该可用陀螺仪角速度代替
+      pid->derivError = -gyro;
+      if(DrYL_Abs(pid->Error)>PID_DEAD_AREA)									//pid死区
+      {
+            pid->outP = pid->Proportion * pid->Error;								 //方便独立观察
+            pid->outI = pid->Integral * pid->SumError;
+            pid->outD = pid->Derivative * pid->derivError;
+          
+            output =(int)(pid->outP+pid->outI+pid->outD);
+              /* ((pid->Proportion * pid->Error) +
+                     (pid->Integral * pid->SumError) +
+                     (pid->Derivative * pid->derivError));*/
+      }
+      else
+      {
+           output=pid->lastoutput;
+      }
+      /******输出限幅*******************/
+      if(output>SUM_LIMIT)
+      {
+        output=SUM_LIMIT;
+      }
+      if(output<-SUM_LIMIT)
+      {
+        output=-SUM_LIMIT;
+      }
+      /**************************/
+      pid->LastError = pid->Error;							 		//更新前一次偏差
+      pid->lastoutput=output;
+    
+      return output;
+}
+
+void DrYL_Set_PID(float  p,float  i,float d,PID *sptr)
 {
     	sptr->Proportion=p;
 	sptr->Integral=	i;
 	sptr->Derivative=d;
-}*/
+}
+void DrYL_Set_PID_New(float  p,float  i,float d,NewPID *sptr)
+{
+    	sptr->Proportion=p;
+	sptr->Integral=	i;
+	sptr->Derivative=d;
+}
 u16  dmp_times=0;
 /********************************************************************/
 /*******************************/
-char hc5883_data[6];
+u8 hc5883_data[6];
 int x,y,z;
 float angel;
-short gyro1[3];
+float gyroPID[3];
+//float  gyro_times=0;
 /**************************/
 u8 DrYL_Get_Gesture(float *yaw,float *pitch, float *roll, float *accel)
 {
        short accel1[3], sensors1;
+       short gyro1[3];
        unsigned long sensor_timestamp1;
        long quat1[4];
        unsigned char more1;
@@ -98,6 +228,13 @@ u8 DrYL_Get_Gesture(float *yaw,float *pitch, float *roll, float *accel)
            accel[0]=accel1[0]/32768.0*2;
            accel[1]=accel1[1]/32768.0*2;
            accel[2]=accel1[2]/32768.0*2;
+           gyroPID[0]=gyro1[0]*0.061*0.0174;///16.4*0.01;
+           gyroPID[1]=gyro1[1]*0.061*0.0174;///16.4*0.01;
+           gyroPID[2]=gyro1[2]*0.061*0.0174;///16.4*0.01;
+           /*if(gyroPID[0]>gyro_times)
+           {
+              gyro_times=gyroPID[0];
+           }*/
            //if(accel_actual[2]>1.5){accel_times++;}
        }
        return 0;
@@ -191,70 +328,106 @@ void DrYL_Updata_Sensor(float *sen, u8 len,float sen_new)
     sen[len-1]=sen_new;
     
 }
-
+float DrYL_Shift_Averenge_Filter(float *sen,u8 len)
+{
+    u8 i;
+    float sum=0;
+    for(i=0;i<len;i++)
+    {
+      sum+=sen[i];
+    }
+    return (sum/len);
+}
+float DrYL_Filter(float d_n,float d_o)
+{
+    /*if(DrYL_Abs(d_n-d_o)>10)return d_o;
+    else return d_n;*/
+   return ((d_n+d_o)/2.0); 
+}
 
 /***********************************************************************/
 float Yaw=0.00;
 float Roll,Pitch;
-int a,b,c;
+float yaw_filter=0,roll_filter=0,pitch_filter=0;
+float gyro_pitch_filter=0,gyro_roll_filter=0;
+//int a,b,c;
+/*
+Model Yaw_M={0.0,0.0};
+Model Roll_M={0.0,0.0};
+Model Pitch_M={0.0,0.0};
+Model gyro_x_M={0.0,0.0};
+Model gyro_y_M={0.0,0.0};
+Model gyro_z_M={0.0,0.0};*/
 
-PID pitch_pid={0,0,2.0,0,4.0,0,0};
-PID roll_pid ={0,0,2.0,0,4.0,0,0};
-u8   pitch_pid_times=0;
-u8   roll_pid_times=0;
+//PID pitch_pid={0,0,0.1,0,0,0,0};
+//PID roll_pid ={0,0,0.1,0,0,0,0};
+/*******************************/
+NewPID pitch_pid_new={0, 2.75,0,2.19,  0,0,0,0, 0,0,0, 0};
+NewPID roll_pid_new= {0, 2.75,0,2.19,  0,0,0,0, 0,0,0, 0};
+/******************************/
+//u8   pitch_pid_times=0;
+//u8   roll_pid_times=0;
 
 float accel_actual[3];
 /*****************debug wariable********/
-u8 accel_times=0;
+//u8 accel_times=0;
+float pitch_max=0;
+float roll_max=0;
+/**********************************************************/
+int roll_pid_result=0,pitch_pid_result=0,yaw_pid_result=0;//PID计算出的结果
 
-/*************************/
-int roll_pid_result,pitch_pid_result;
 u8 get_sensor_times=0;
-
+u16 MotoGiven=999;
+#define PIDMIX(X,Y,Z) MotoGiven + pitch_pid_result*X + roll_pid_result*Y + yaw_pid_result*Z	
 u8 DrYL_PID_Control_pitch_roll(void)             
 {
-        
-       
-        
-        if(TIM2_IRQCNT>10)
+        if(TIM2_IRQCNT>4)
         {
             TIM2_IRQCNT=0; 
              
             
             DrYL_Get_Gesture(&Yaw,&Pitch,&Roll,accel_actual); //获取姿态和加速度
-        
-           // DrYL_Send_Yaw(Yaw);
-           // DrYL_Send_Pitch(Pitch);
-           // DrYL_Send_Roll(Roll);
-            //
-            //DrYL_Send_Moto(Moto_X_Positive,Moto_X_Negative,Moto_Y_Positive,Moto_Y_Negative);
-         
-           // DrYL_Set_PID(1,0,0,&pitch_pid);//设置pitch  pid参数
-           // DrYL_Set_PID(1,0,0,&roll_pid);//设置roll  pid 参数
-            DrYL_IncPIDInit(&pitch_pid,pitch_pid.Proportion,pitch_pid.Integral,pitch_pid.Derivative);
-            DrYL_IncPIDInit(&roll_pid,roll_pid.Proportion,roll_pid.Integral,roll_pid.Derivative);
-            pitch_pid_result=DrYL_IncPID_Calc(&pitch_pid,Pitch,0); // 计算增量型参数
-            roll_pid_result=DrYL_IncPID_Calc(&roll_pid,Roll,0); //
-            // 一个调节周期之内不会让它一直上升,只调节一对电机，另一对电机作为参考 
-            if((pitch_pid.LastError<PID_DEAD_AREA )&&(pitch_pid.LastError>-PID_DEAD_AREA ))// 死区
-            {
-                    
-            }
-            else
-            {
-                   Moto_X_Negative-=pitch_pid_result;
-                   Moto_X_Positive+=pitch_pid_result;
-            }
-            if((roll_pid.LastError<PID_DEAD_AREA )&&(roll_pid.LastError>-PID_DEAD_AREA )) //死区
-            {
-                     
-            }
-            else
-            {  
-                    Moto_Y_Negative-=roll_pid_result;
-                    Moto_Y_Positive+=roll_pid_result;
-            }	
+            //更新数据
+            DrYL_Updata_Sensor(roll_table,DATA_LENGTH,Roll);
+            DrYL_Updata_Sensor(pitch_table,DATA_LENGTH,Pitch); 
+            DrYL_Updata_Sensor(gyro_pitch_table,DATA_LENGTH,gyroPID[0]);
+            DrYL_Updata_Sensor(gyro_roll_table,DATA_LENGTH,gyroPID[1]);
             
+            roll_filter=DrYL_Shift_Averenge_Filter(roll_table,DATA_LENGTH);
+            pitch_filter=DrYL_Shift_Averenge_Filter(pitch_table,DATA_LENGTH);
+            gyro_pitch_filter=DrYL_Shift_Averenge_Filter(gyro_pitch_table,DATA_LENGTH);
+            gyro_roll_filter=DrYL_Shift_Averenge_Filter(gyro_roll_table,DATA_LENGTH);
+             
+            if(pitch_filter>pitch_max)pitch_max=pitch_filter;
+            if(roll_filter>roll_max)roll_max=roll_filter;
+           /* gyro_x_M.now=gyroPID[0];
+            gyro_y_M.now=gyroPID[1];
+            gyro_z_M.now=gyroPID[2];
+           
+            ***********************滤波 两次之间的差值不能大于 1 ***************************
+            Yaw_M.old=DrYL_Filter(Yaw_M.now,Yaw_M.old);
+            Pitch_M.old=DrYL_Filter(Pitch_M.now,Pitch_M.old);
+            Roll_M.old=DrYL_Filter(Roll_M.now,Roll_M.old);
+            gyro_x_M.old=DrYL_Filter(gyro_x_M.now,gyro_x_M.old);
+            gyro_y_M.old=DrYL_Filter(gyro_y_M.now,gyro_y_M.old);
+            gyro_z_M.old=DrYL_Filter(gyro_z_M.now,gyro_z_M.old);
+            
+            ********************************************************/
+            DrYL_IncPIDInit_new(&pitch_pid_new,pitch_pid_new.Proportion,pitch_pid_new.Integral,pitch_pid_new.Derivative);
+            DrYL_IncPIDInit_new(&roll_pid_new,roll_pid_new.Proportion,roll_pid_new.Integral,roll_pid_new.Derivative);
+
+            pitch_pid_result=pidUpdate(&pitch_pid_new,pitch_filter,0,gyro_pitch_filter); // 计算位置式参数
+            roll_pid_result=pidUpdate(&roll_pid_new,roll_filter,0,gyro_roll_filter); //
+
+            Moto_X_Negative =PIDMIX(-1,0,-1);// MotoGiven-pitch_pid_result;
+            Moto_X_Positive =PIDMIX(+1,0,-1);//MotoGiven+pitch_pid_result;
+
+            Moto_Y_Negative=PIDMIX(0,-1,+1);//MotoGiven-roll_pid_result; // 
+            Moto_Y_Positive=PIDMIX(0,+1,+1);//MotoGiven+roll_pid_result;// 位置式PID
+
+            
+            
+            /***********************   限幅    ***************************/
             if(Moto_X_Positive   > Moto_PwmMax_Debug)	    Moto_X_Positive    = Moto_PwmMax_Debug;
             if(Moto_X_Negative   > Moto_PwmMax_Debug)	    Moto_X_Negative    = Moto_PwmMax_Debug;
             if(Moto_Y_Positive   > Moto_PwmMax_Debug)	    Moto_Y_Positive    = Moto_PwmMax_Debug;
@@ -263,10 +436,50 @@ u8 DrYL_PID_Control_pitch_roll(void)
             if(Moto_X_Negative   <=Moto_PwmMin_Debug)       Moto_X_Negative    = Moto_PwmMin_Debug;
             if(Moto_Y_Positive   <=Moto_PwmMin_Debug)       Moto_Y_Positive    = Moto_PwmMin_Debug;
             if(Moto_Y_Negative   <=Moto_PwmMin_Debug)       Moto_Y_Negative    = Moto_PwmMin_Debug;
+            /***************************************************************************************/
             MotoPWMControl(Moto_X_Positive,Moto_X_Negative,Moto_Y_Positive,Moto_Y_Negative);
                       //DrYL_Send_Moto_PWM(Moto_X_Positive,Moto_X_Negative,Moto_Y_Positive,Moto_Y_Negative);
 
         }
 	
         return 0;
+}
+
+
+//float aa=0,bb=0,cc=0;
+void DrYL_Read_MPU6050_GYRO(int *gyro_x,int *gyro_y,int *gyro_z)
+{
+  u8 gyro_data[6]={0};
+  AnBT_DMP_I2C_Read(0x68, GYRO_XOUT_L ,  1 , &gyro_data[0]);
+  AnBT_DMP_I2C_Read(0x68, GYRO_XOUT_H ,  1 , &gyro_data[1]);
+  AnBT_DMP_I2C_Read(0x68, GYRO_YOUT_L ,  1 , &gyro_data[2]);
+  AnBT_DMP_I2C_Read(0x68, GYRO_YOUT_H ,  1 , &gyro_data[3]);
+  AnBT_DMP_I2C_Read(0x68, GYRO_ZOUT_L ,  1 , &gyro_data[4]);
+  AnBT_DMP_I2C_Read(0x68, GYRO_ZOUT_H ,  1 , &gyro_data[5]);
+  *gyro_x= (int)(gyro_data[1]<<8|gyro_data[0]);
+  *gyro_y= (int)(gyro_data[3]<<8|gyro_data[2]);
+  *gyro_z= (int)(gyro_data[5]<<8|gyro_data[4]); 
+}
+int Gyrooffset_X=0,Gyrooffset_Y=0,Gyrooffset_Z=0;
+void Gyro_Correct(void)
+{
+	unsigned char i=0;
+	unsigned char numGyro=200;
+
+	int Gyrox=0;
+	int Gyroy=0;
+	int Gyroz=0;						  //陀螺仪校正中间变量
+        int gx=0,gy=0,gz=0;
+	for(i=0;i<numGyro;i++)
+	{
+		DrYL_Read_MPU6050_GYRO(&gx,&gy,&gz);
+		Gyrox+=gx;
+		Gyroy+=gy;
+		Gyroz+=gz;
+		delay_ms(2);
+	}	
+
+	Gyrooffset_X= Gyrox/numGyro;					   
+	Gyrooffset_Y= Gyroy/numGyro;
+	Gyrooffset_Z= Gyroz/numGyro;
 }

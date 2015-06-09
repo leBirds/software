@@ -60,7 +60,7 @@ int main(void)
         AnBT_UART2_NVIC_Configuration();
         AnBT_UART2Configuration();  
        /*******************************************/ 
-        
+      //  Gyro_Correct();
         
        DrYL_Motor_Driver_init();  // 电调初始化     
        // DrYL_IncPIDInit(&pitch_pid);
@@ -72,15 +72,7 @@ int main(void)
         Moto_Y_Negative=Moto_PwmMin;
         
         DrYL_Send_Moto_PWM(Moto_X_Positive,Moto_X_Negative,Moto_Y_Positive,Moto_Y_Negative);//设置为最小油门
-    /*    for(i = 0; i <40;i++)
-        {
-             Moto_X_Positive+=10;
-             Moto_Y_Positive+=10;
-             Moto_Y_Negative+=10;
-             DrYL_Send_Moto_PWM(Moto_X_Positive,Moto_X_Negative,Moto_Y_Positive,Moto_Y_Negative);
-             delay_ms(100);
-        }*/
-       // AnBT_Uart3_Send_Char('.');
+
 	while (1)
 	{
              if(StartFlag==1)
@@ -88,54 +80,12 @@ int main(void)
                 DrYL_PID_Control_pitch_roll();
              }
              DrYL_GetCommand();
+             //DrYL_Read_MPU6050_GYRO();
              if(MPU6050_Tim_1ms>1)
              {
         	MPU6050_Tim_1ms=0;
                 DrYLSendOneFrameData(); //解析命令，发送数据
-             }
-            /* if(time_1ms_cnt>5000)
-             { 
-                    time_1ms_cnt=0;
-                    
-		    if((quad_up_flag==0 && quad_down_flag ==0)||(quad_up_flag==1 && quad_down_flag ==0))
-		    {
-	                 Moto_X_Positive+=10;
-	                 Moto_X_Negative+=10;
-	                 Moto_Y_Positive+=10;
-	                 Moto_Y_Negative+=10;
-                          if((Moto_X_Positive>Moto_PwmMax_Debug)||(Moto_X_Negative>Moto_PwmMax_Debug)||
-                            (Moto_Y_Positive>Moto_PwmMax_Debug)||(Moto_Y_Negative>Moto_PwmMax_Debug))
-                          {
-                                  quad_up_flag=0;
-                                  quad_down_flag =1 ;
-                          }
-                          else
-                          {
-                                quad_up_flag =1;
-                                quad_down_flag =0;
-                          }
-                          
-		    }
-		    else if(quad_down_flag==1 && quad_up_flag ==0)
-		    {
-		    	 Moto_X_Positive-=10;
-	                 Moto_X_Negative-=10;
-	                 Moto_Y_Positive-=10;
-	                 Moto_Y_Negative-=10;
-                         if((Moto_X_Negative<=Moto_PwmMin_Debug)||(Moto_X_Positive <= Moto_PwmMin_Debug)||
-                              (Moto_Y_Negative<=Moto_PwmMin_Debug)||(Moto_Y_Positive <= Moto_PwmMin_Debug))
-                         {
-                                 DrYL_Motor_Stop();
-                         }
-		    }
-		    
-             
-		
-      
-             }
-             
-             */
-                          
+             }                 
          }
   
  // return 0;

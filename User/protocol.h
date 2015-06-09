@@ -1,6 +1,8 @@
 #ifndef _DRYL_PROTOCOL_H__
 #define _DRYL_PROTOCOL_H__
 
+#define CHANGE_NUMBER 0.1
+
 extern char StartFlag;
 
 extern u8 DrYL_Send_Moto_PWM(u16 moto1,u16 moto2,u16 moto3,u16 moto4);
@@ -65,4 +67,5 @@ extern void DrYL_Roll_PID_Dec_I(void);
 extern void DrYL_Roll_PID_Dec_D(void);
 
 extern void DrYLSendOneFrameData(void);
+extern float DrYL_Abs(float d);
 #endif

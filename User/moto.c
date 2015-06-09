@@ -4,7 +4,7 @@ void Tim3_init(void)
 {
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 	TIM_OCInitTypeDef  TIM_OCInitStructure;
-	uint16_t PrescalerValue = 0;
+        //uint16_t PrescalerValue = 0;
 	/* -----------------------------------------------------------------------
         TIM3 Configuration: generate 4 PWM signals with 4 different duty cycles:
         The TIM3CLK frequency is set to SystemCoreClock (Hz), to get TIM3 counter
@@ -24,7 +24,7 @@ void Tim3_init(void)
 	----------------------------------------------------------------------- */
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
 	/* Compute the prescaler value */
-	PrescalerValue = (uint16_t) (SystemCoreClock / 24000000) - 1;
+	//PrescalerValue = (uint16_t) (SystemCoreClock / 24000000) - 1;
 	/* Time base configuration */
 	TIM_TimeBaseStructure.TIM_Period = 19999;		//计数上线	250Hz
 	TIM_TimeBaseStructure.TIM_Prescaler = 72-1;//PrescalerValue;	//pwm时钟分频
@@ -138,36 +138,51 @@ void DrYL_Motor_Stop(void)
         Moto_Y_Positive   = Moto_PwmMin;
         Moto_Y_Negative   = Moto_PwmMin;
         StartFlag=0;
+        MotoGiven=999;
 	 MotoPWMControl(Moto_X_Positive,Moto_X_Negative,Moto_Y_Positive,Moto_Y_Negative);
 }
 
 void DrYL_Moto_Start(void)
 {
 	 Moto_X_Positive   = 999;//(Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
-        Moto_X_Negative  = 999;//(Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
-        Moto_Y_Positive    = 999;//(Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
-        Moto_Y_Negative  = 999;//(Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
+         Moto_X_Negative  = 999;//(Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
+         Moto_Y_Positive    = 999;//(Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
+         Moto_Y_Negative  = 999;//(Moto_PwmMax-Moto_PwmMin)/4+Moto_PwmMin;
         StartFlag=1;
+        MotoGiven=999;
 	 MotoPWMControl(Moto_X_Positive,Moto_X_Negative,Moto_Y_Positive,Moto_Y_Negative);
 }
 void DrYL_Moto_Top(void)
 {
-	 Moto_X_Positive    += 10;
+   
+	/* Moto_X_Positive    += 10;
         Moto_X_Negative   += 10;
         Moto_Y_Positive     += 10;
-        Moto_Y_Negative   += 10;
+        Moto_Y_Negative   += 10;*/
+    MotoGiven+=10;
+    if(MotoGiven<=999)
+    {
+        MotoGiven=999;
+    }
 	
 }
 void DrYL_Moto_Down(void)
 {
-	 Moto_X_Positive    -= 10;
+      
+	/* Moto_X_Positive    -= 10;
         Moto_X_Negative   -= 10;
         Moto_Y_Positive     -= 10;
-        Moto_Y_Negative   -= 10;
+        Moto_Y_Negative   -= 10;*/
+
+      MotoGiven-=10;
+     if(MotoGiven<=999)
+     {
+        MotoGiven=999;
+     }
 }
 void DrYL_Moto_Left(void)
 {
-
+ 
 }
 void DrYL_Moto_Right(void)
 {
