@@ -1,7 +1,8 @@
 #ifndef __MY_CONTROL_H__
 #define __MY_CONTROL_H_
 
-#define PID_DEAD_AREA 1
+#define PID_DEAD_AREA 0.1
+#define D_AREA   5
 
 #define P_LIMIT   20
 #define I_LIMIT   100
@@ -11,7 +12,7 @@
 #define IMU_UPDATE_DT 0.004
 
 #define Moto_PwmMin_Debug 999
-#define Moto_PwmMax_Debug 1450  //45%
+#define Moto_PwmMax_Debug 1650  //45%
 
 #define	GYRO_XOUT_H		0x43  //мсбщрг
 #define	GYRO_XOUT_L		0x44	

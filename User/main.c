@@ -21,14 +21,14 @@ float Roll,Pitch;
 int a,b,c;
 float q0=1.0f,q1=0.0f,q2=0.0f,q3=0.0f;
 */
-u16 k1=0;
-u16 k2=0;
-u8 i=0;
-float z_position=0;
-u8 quad_up_flag=0;
-u8 quad_down_flag=0;
+//u16 k1=0;
+//u16 k2=0;
+//u8 i=0;
+//float z_position=0;
+//u8 quad_up_flag=0;
+//u8 quad_down_flag=0;
 /********************************/
-int xxx=0,yyy=0,zzz=0;
+//int xxx=0,yyy=0,zzz=0;
 int main(void)
 {
 	

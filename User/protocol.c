@@ -407,6 +407,10 @@ void DrYL_Send_PID_Data(float d)
     
 }*/
 char frame=0;
+
+/****************************************************
+发送一帧数据，包括航向角、俯仰角、翻滚角
+*******************************************************/
 void DrYLSendOneFrameData(void)
 {
   AnBT_Uart3_Send_Char('S');
@@ -414,15 +418,15 @@ void DrYLSendOneFrameData(void)
   {
   case 0:
     AnBT_Uart3_Send_Char('1');
-    DrYL_Send_Sensor(yaw_filter); 
+    DrYL_Send_Sensor(Yaw); //发送航向角的信息
     break;
   case 1:
     AnBT_Uart3_Send_Char('2');
-    DrYL_Send_Sensor(roll_filter);
+    DrYL_Send_Sensor(Roll); //发送横滚角
     break;
   case 2:
     AnBT_Uart3_Send_Char('3');
-    DrYL_Send_Sensor(pitch_filter);
+    DrYL_Send_Sensor(Pitch);// 发送俯仰角
     break;
   case 3:
     AnBT_Uart3_Send_Char('4');
