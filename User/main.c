@@ -28,7 +28,7 @@ float z_position=0;
 u8 quad_up_flag=0;
 u8 quad_down_flag=0;
 /********************************/
-
+int xxx=0,yyy=0,zzz=0;
 int main(void)
 {
 	
@@ -36,7 +36,7 @@ int main(void)
 	TIM4_INIT(); //time4 init
           
 	
-        DrYL_TIME2_NVIC_Configutation(); // interupt configure 
+        DrYL_TIME2_NVIC_Configutation(); // timer2 interupt configure 
         TIM2_INIT(); //delay init
         
         STM32_PWM_INIT();  //PWN init
@@ -54,15 +54,15 @@ int main(void)
         AnBT_UART3_NVIC_Configuration();
        /*****************************************************/ 
         
-       /*****************串口2初始化****************/
+       /*****************串口2初始化****************
         DrYL_Uart2_RCC_Configuration();
         AnBT_UART2_GPIO_Configuration();
         AnBT_UART2_NVIC_Configuration();
         AnBT_UART2Configuration();  
-       /*******************************************/ 
+       *******************************************/ 
       //  Gyro_Correct();
         
-       DrYL_Motor_Driver_init();  // 电调初始化     
+        DrYL_Motor_Driver_init();  // 电调初始化     
        // DrYL_IncPIDInit(&pitch_pid);
        // DrYL_IncPIDInit(&roll_pid);
         //run_self_test();
@@ -75,13 +75,15 @@ int main(void)
 
 	while (1)
 	{
+         
+            //DrYL_Read_MPU6050_GYRO(&xxx,&yyy,&zzz);
              if(StartFlag==1)
              {
                 DrYL_PID_Control_pitch_roll();
              }
              DrYL_GetCommand();
              //DrYL_Read_MPU6050_GYRO();
-             if(MPU6050_Tim_1ms>1)
+             if(MPU6050_Tim_1ms>20)
              {
         	MPU6050_Tim_1ms=0;
                 DrYLSendOneFrameData(); //解析命令，发送数据

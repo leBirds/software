@@ -77,7 +77,7 @@ void AnBT_UART3_Interrupt(void)
 				                     pstart  	= START_STRING; 
 				                     Prx       	= rx_buffer;      
 				                     state    	= STA_START;     
-						      com_read_flag =1; //接收一帧数据完成，标志位置一
+						     com_read_flag =1; //接收一帧数据完成，标志位置一
 			                  }
 		                }
 		                else 

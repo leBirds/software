@@ -1,11 +1,13 @@
 #ifndef __MY_CONTROL_H__
 #define __MY_CONTROL_H_
 
-#define PID_DEAD_AREA 0.8
+#define PID_DEAD_AREA 1
 
-#define I_LIMIT   50
+#define P_LIMIT   20
+#define I_LIMIT   100
+
 #define ANGEL_LIMIT  10
-#define SUM_LIMIT   400  // 40%的油门
+#define SUM_LIMIT   100  // 40%的油门
 #define IMU_UPDATE_DT 0.004
 
 #define Moto_PwmMin_Debug 999

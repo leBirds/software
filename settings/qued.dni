@@ -11,7 +11,7 @@ ActionState=1
 Enabled=0
 ShowSource=1
 [DebugChecksum]
-Checksum=1671224828
+Checksum=1524841032
 [DisAssemblyWindow]
 NumStates=_ 1
 State 1=_ 1
@@ -85,8 +85,9 @@ A0=_ "C:\Users\Administrator\Desktop\quad\software\quad_newVirson\software\User\
 A1=_ "C:\Users\Administrator\Desktop\quad\software\位置式\quad_newVirson\software\User\main.c" ""
 A2=_ "C:\Users\Administrator\Desktop\四旋翼\software\quad_V1.1\library\src\stm32f10x_tim.c" ""
 A3=_ "F:\quad_newVirson\software\User\main.c" ""
-A4=_ "J:\quad_newVirson\software\User\main.c" ""
-Count=5
+A4=_ "F:\位置式\quad_newVirson\software\User\main.c" ""
+A5=_ "J:\quad_newVirson\software\User\main.c" ""
+Count=6
 SuppressDialog=1
 [SWOTraceWindow]
 PcSampling=0
