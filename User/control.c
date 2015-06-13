@@ -381,8 +381,8 @@ Model gyro_z_M={0.0,0.0};*/
 //PID pitch_pid={0,0,0.1,0,0,0,0};
 //PID roll_pid ={0,0,0.1,0,0,0,0};
 /*******************************/
-NewPID pitch_pid_new={0, 2.0,0.7,6.0,  0,0,0,0, 0,0,0, 0};
-NewPID roll_pid_new= {0, 2.0,0.7,-6.0,  0,0,0,0, 0,0,0, 0};
+NewPID pitch_pid_new={0, 6.7,2.4,2.6,  0,0,0,0, 0,0,0, 0};
+NewPID roll_pid_new= {0, 6.7,2.4,2.6,  0,0,0,0, 0,0,0, 0};
 /******************************/
 //u8   pitch_pid_times=0;
 //u8   roll_pid_times=0;
@@ -429,8 +429,8 @@ u8 DrYL_PID_Control_pitch_roll(void)
             DrYL_IncPIDInit_new(&pitch_pid_new,pitch_pid_new.Proportion,pitch_pid_new.Integral,pitch_pid_new.Derivative);
             DrYL_IncPIDInit_new(&roll_pid_new,roll_pid_new.Proportion,roll_pid_new.Integral,roll_pid_new.Derivative);
 
-            pitch_pid_result=pidUpdate(&pitch_pid_new,Pitch,0,gyroPID[0]); // 计算位置式参数
-            roll_pid_result=pidUpdate(&roll_pid_new,Roll,0,gyroPID[1]); //
+            pitch_pid_result=pidUpdate(&pitch_pid_new,Pitch,0,gyroPID[1]); // 计算位置式参数
+            roll_pid_result=pidUpdate(&roll_pid_new,Roll,0,gyroPID[0]); //
             
             if(MotoGiven<1150) //预防刚起步就有大的动作
             {
